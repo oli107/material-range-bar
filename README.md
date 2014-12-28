@@ -23,7 +23,7 @@ Supported on API Level 12 and above for animations.
 	}
 
 
-# Custom Attributes (both via XML and programmatically):
+## Custom Attributes (both via XML and programmatically):
 
 ### Tick Properties
 ```
@@ -61,7 +61,7 @@ selectorSize | dimension
 pin indices (the location of the thumbs on the RangeBar)
 ```
 
-# Examples
+## Examples
 
 ### Layout XML
 
@@ -96,17 +96,17 @@ This is a seekbar with only a single value (note rangeBar=false)
 Add a listener - rangeBar.setOnRangeBarChangeListener which returns left and right index as well as value.
 
 
-# TODO
+## TODO
 
 - Better instructions.
 - Properly implement Map of strings to each value
 - Generally make it a better project!
 
-# Demo
+## Demo
 
 [Get it from the Google Play Store](https://play.google.com/store/apps/details?id=com.appyvet.rangebarsample)
 
-# License
+## License
 
 Copyright 2014, AppyVet, Inc. 
 
