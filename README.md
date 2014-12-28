@@ -45,7 +45,6 @@ pin indices (the location of the thumbs on the RangeBar)
 ```
 
 Supported on API Level 12 and above for animations.
-https://github.com/oli107/material-range-bar/blob/master/Screenshots/screenshot%20pin%20active.png
 ![ScreenShot](https://github.com/oli107/material-range-bar/blob/master/Screenshots/screenshot%20pin%20active.png)
 ![ScreenShot](https://github.com/oli107/material-range-bar/blob/master/Screenshots/screenshot.png)
 
@@ -55,34 +54,34 @@ Examples
 ## Layout XML
 
 This is a rangebar with both a lower and upper value
-```
+```xml
 <com.appyvet.rangebar.RangeBar
-        xmlns:custom="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/rangebar"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        custom:tickStart="5"
-        custom:tickInterval="1"
-        custom:tickEnd="10"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+	xmlns:custom="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/rangebar"
+	android:layout_width="match_parent"
+	android:layout_height="72dp"
+	custom:tickStart="5"
+	custom:tickInterval="1"
+	custom:tickEnd="10"
+	android:layout_marginLeft="16dp"
+	android:layout_marginRight="16dp"/>
 ```
 
 This is a seekbar with only a single value (note rangeBar=false)
-```
+```xml
 <com.appyvet.rangebar.RangeBar
-        xmlns:custom="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/rangebar"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        custom:rangeBar="false"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+	xmlns:custom="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/rangebar"
+	android:layout_width="match_parent"
+	android:layout_height="72dp"
+	custom:rangeBar="false"
+	android:layout_marginLeft="16dp"
+	android:layout_marginRight="16dp"/>
 ```
 
 ## Adding a listener
 //TODO add a full example here
-- Add a listener - rangeBar.setOnRangeBarChangeListener which returns left and right index as well as value.
+Add a listener - rangeBar.setOnRangeBarChangeListener which returns left and right index as well as value.
 
 
 TODO
