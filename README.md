@@ -8,35 +8,80 @@ It is similar to an enhanced SeekBar widget, though it doesn't make use of the S
 
 Developers can customize the following attributes (both via XML and programmatically):
 
-- bar color
-- bar thickness
-- tick size
-- tick color
-- tick start value
-- tick end value
-- tick interval
-- connecting line thickness
-- connecting line color
-- pin size
-- pin color
-- Bar type (Range or seek)
+### Tick Properties
+```
+tickStart | float
+tickEnd | float
+tickInterval | float
+tickHeight | dimension
+tickColor | color
+```
 
-Finally, the following property can be set programmatically, but not via XML:
-- pin indices (the location of the thumbs on the RangeBar)
+###  Bar Properties
+```
+rangeBar | boolean
+barWeight | dimension
+barColor | reference or color
+barPaddingBottom | dimension
+connectingLineWeight | dimension
+connectingLineColor | reference or color
+```
+
+### Pin Properties
+```
+pinPadding | dimension
+pinRadius | dimension
+```
+
+### Selector Properties
+```
+selectorColor | reference or color
+selectorSize | dimension
+
+### Via runtime only (no XML option)
+```
+pin indices (the location of the thumbs on the RangeBar)
+```
 
 Supported on API Level 12 and above for animations.
 https://github.com/oli107/material-range-bar/blob/master/Screenshots/screenshot%20pin%20active.png
 ![ScreenShot](https://github.com/oli107/material-range-bar/blob/master/Screenshots/screenshot%20pin%20active.png)
 ![ScreenShot](https://github.com/oli107/material-range-bar/blob/master/Screenshots/screenshot.png)
 
-Instructions
+Examples
 =======
-- Add the widget to your view.
-- Either in xml (rangeBar="true") or programatically (rangeBar.setRangeBarEnabled(true)). If true will create two "pins" for a range bar, if false, will act as a single seek bar.
-- Set start and end values, as well as interval. These are float values, the view will autoatically calculate the correct indices/tick count.
+
+## Layout XML
+
+This is a rangebar with both a lower and upper value
+```
+<com.appyvet.rangebar.RangeBar
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rangebar"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        custom:tickStart="5"
+        custom:tickInterval="1"
+        custom:tickEnd="10"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
+```
+
+This is a seekbar with only a single value (note rangeBar=false)
+```
+<com.appyvet.rangebar.RangeBar
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rangebar"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        custom:rangeBar="false"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
+```
+
+## Adding a listener
+//TODO add a full example here
 - Add a listener - rangeBar.setOnRangeBarChangeListener which returns left and right index as well as value.
-- Style the view as you want.
-- That's it!
 
 
 TODO
