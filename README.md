@@ -10,7 +10,7 @@ Supported on API Level 12 and above for animations.
 ![ScreenShot](https://github.com/oli107/material-range-bar/blob/master/Screenshots/screenshot%20pin%20active.png)
 ![ScreenShot](https://github.com/oli107/material-range-bar/blob/master/Screenshots/screenshot.png)
 
-# Installation
+## Installation
 
 **build.gradle**
 
