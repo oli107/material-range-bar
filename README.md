@@ -37,6 +37,7 @@ pinRadius | dimension
 ```
 selectorColor | reference or color
 selectorSize | dimension
+```
 
 ### Via runtime only (no XML option)
 ```
