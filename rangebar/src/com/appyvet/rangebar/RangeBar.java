@@ -1061,7 +1061,7 @@ public class RangeBar extends View {
      */
     private boolean valueOutOfRange(float leftThumbValue, float rightThumbValue) {
         return (leftThumbValue < mTickStart || leftThumbValue >= mTickEnd
-                || rightThumbValue < mTickStart || rightThumbValue >= mTickEnd);
+                || rightThumbValue <= mTickStart || rightThumbValue > mTickEnd);
     }
 
     /**
