@@ -1061,7 +1061,7 @@ public class RangeBar extends View {
      */
     private boolean valueOutOfRange(float leftThumbValue, float rightThumbValue) {
         return (leftThumbValue < mTickStart || leftThumbValue >= mTickEnd
-                || rightThumbValue < mTickStart || rightThumbValue >= mTickEnd);
+                || rightThumbValue <= mTickStart || rightThumbValue > mTickEnd);
     }
 
     /**
@@ -1119,9 +1119,6 @@ public class RangeBar extends View {
             float leftThumbXDistance = mIsRangeBar ? Math.abs(mLeftThumb.getX() - x) : 0;
             float rightThumbXDistance = Math.abs(mRightThumb.getX() - x);
 
-            // Get the updated nearest tick marks for each thumb.
-            final int newLeftIndex = mIsRangeBar ? mBar.getNearestTickIndex(mLeftThumb) : 0;
-            final int newRightIndex = mBar.getNearestTickIndex(mRightThumb);
             if (leftThumbXDistance < rightThumbXDistance) {
                 if (mIsRangeBar) {
                     mLeftThumb.setX(x);
@@ -1131,6 +1128,10 @@ public class RangeBar extends View {
                 mRightThumb.setX(x);
                 releasePin(mRightThumb);
             }
+            
+            // Get the updated nearest tick marks for each thumb.
+            final int newLeftIndex = mIsRangeBar ? mBar.getNearestTickIndex(mLeftThumb) : 0;
+            final int newRightIndex = mBar.getNearestTickIndex(mRightThumb);
 
             // If either of the indices have changed, update and call the listener.
             if (newLeftIndex != mLeftIndex || newRightIndex != mRightIndex) {
