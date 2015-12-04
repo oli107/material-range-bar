@@ -1141,12 +1141,12 @@ public class RangeBar extends View {
         if (mIsRangeBar) {
             mLeftThumb = new PinView(ctx);
             mLeftThumb.init(ctx, yPos, 0, mPinColor, mTextColor, mCircleSize, mCircleColor,
-                    mMinPinFont, mMaxPinFont, false);
+                    mMinPinFont, mMaxPinFont, mArePinsTemporary);
         }
         mRightThumb = new PinView(ctx);
         mRightThumb
                 .init(ctx, yPos, 0, mPinColor, mTextColor, mCircleSize, mCircleColor, mMinPinFont,
-                        mMaxPinFont, false);
+                        mMaxPinFont, mArePinsTemporary);
 
         float marginLeft = getMarginLeft();
         float barLength = getBarLength();
