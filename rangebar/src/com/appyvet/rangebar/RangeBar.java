@@ -487,7 +487,6 @@ public class RangeBar extends View {
         this.mPinTextListener = mPinTextListener;
     }
 
-
     public void setFormatter(IRangeBarFormatter formatter) {
         if (mLeftThumb != null) {
             mLeftThumb.setFormatter(formatter);
@@ -498,6 +497,18 @@ public class RangeBar extends View {
         }
 
         mFormatter = formatter;
+    }
+
+    public void setArePinsTemporary(boolean mPinsAreTemporary) {
+        if (mLeftThumb != null) {
+            mLeftThumb.setArePinsTemporary(mPinsAreTemporary);
+        }
+
+        if (mRightThumb != null) {
+            mRightThumb.setArePinsTemporary(mPinsAreTemporary);
+        }
+
+        this.mArePinsTemporary = mPinsAreTemporary;
     }
 
     public void setDrawTicks(boolean drawTicks) {
