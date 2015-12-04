@@ -105,6 +105,10 @@ class PinView extends View {
         this.formatter = mFormatter;
     }
 
+    public void setArePinsTemporary(boolean mPinsAreTemporary) {
+        this.mPinsAreTemporary = mPinsAreTemporary;
+    }
+
     /**
      * The view is created empty with a default constructor. Use init to set all the initial
      * variables for the pin
