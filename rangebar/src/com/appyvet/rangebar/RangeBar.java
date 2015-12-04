@@ -1140,10 +1140,12 @@ public class RangeBar extends View {
 
         if (mIsRangeBar) {
             mLeftThumb = new PinView(ctx);
+            mLeftThumb.setFormatter(mFormatter);
             mLeftThumb.init(ctx, yPos, 0, mPinColor, mTextColor, mCircleSize, mCircleColor,
                     mMinPinFont, mMaxPinFont, false);
         }
         mRightThumb = new PinView(ctx);
+        mRightThumb.setFormatter(mFormatter);
         mRightThumb
                 .init(ctx, yPos, 0, mPinColor, mTextColor, mCircleSize, mCircleColor, mMinPinFont,
                         mMaxPinFont, false);
