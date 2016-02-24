@@ -69,6 +69,7 @@ public class MainActivity extends Activity implements
         final TextView valueButton = (TextView) findViewById(R.id.setValue);
         final TextView rangeButton = (TextView) findViewById(R.id.enableRange);
         final TextView disabledButton = (TextView) findViewById(R.id.disable);
+        final TextView collapsibleButton = (TextView) findViewById(R.id.collapsible);
 
         //Sets the buttons to bold.
 //        barColor.setTypeface(font, Typeface.BOLD);
@@ -88,6 +89,12 @@ public class MainActivity extends Activity implements
             @Override
             public void onClick(View v) {
                 rangebar.setEnabled(!rangebar.isEnabled());
+            }
+        });
+        collapsibleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rangebar.setCollapsible(!rangebar.isCollapsible());
             }
         });
 

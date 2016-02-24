@@ -96,6 +96,8 @@ public class RangeBar extends View {
 
     private static final float DEFAULT_BAR_PADDING_BOTTOM_DP = 24;
 
+    private static final boolean DEFAULT_COLLAPSIBLE = true;
+
     // Instance variables for all of the customizable attributes
 
     private float mTickHeightDP = DEFAULT_TICK_HEIGHT_DP;
@@ -131,6 +133,8 @@ public class RangeBar extends View {
     private float mMinPinFont = DEFAULT_MIN_PIN_FONT_SP;
 
     private float mMaxPinFont = DEFAULT_MAX_PIN_FONT_SP;
+
+    private boolean mCollapsible = DEFAULT_COLLAPSIBLE;
 
     // setTickCount only resets indices before a thumb has been pressed or a
     // setThumbIndices() is called, to correspond with intended usage
@@ -234,6 +238,7 @@ public class RangeBar extends View {
         bundle.putFloat("TICK_HEIGHT_DP", mTickHeightDP);
         bundle.putFloat("BAR_WEIGHT", mBarWeight);
         bundle.putInt("BAR_COLOR", mBarColor);
+        bundle.putBoolean("COLLAPSIBLE", mCollapsible);
         bundle.putFloat("CONNECTING_LINE_WEIGHT", mConnectingLineWeight);
         bundle.putInt("CONNECTING_LINE_COLOR", mConnectingLineColor);
 
@@ -273,6 +278,7 @@ public class RangeBar extends View {
             mBarColor = bundle.getInt("BAR_COLOR");
             mCircleSize = bundle.getFloat("CIRCLE_SIZE");
             mCircleColor = bundle.getInt("CIRCLE_COLOR");
+            mCollapsible = bundle.getBoolean("COLLAPSIBLE");
             mConnectingLineWeight = bundle.getFloat("CONNECTING_LINE_WEIGHT");
             mConnectingLineColor = bundle.getInt("CONNECTING_LINE_COLOR");
 
@@ -691,9 +697,9 @@ public class RangeBar extends View {
 
 
     /**
-     * Set if the pins should dissapear after released
+     * Set if the pins should disappear after released
      *
-     * @param arePinsTemporary Boolean - true if pins shoudl dissapear after released, false to
+     * @param arePinsTemporary Boolean - true if pins should disappear after released, false to
      *                         stay
      *                         drawn
      */
@@ -722,6 +728,17 @@ public class RangeBar extends View {
     public void setSelectorColor(int selectorColor) {
         mCircleColor = selectorColor;
         createPins();
+    }
+
+    /**
+     * Sets whether or not the bar is collapsible; a collapsible range bar
+     * does not have a minimum range.
+     *
+     * @param collapsible Boolean - true if the range bar should be collapsible.
+     */
+    public void setCollapsible(boolean collapsible) {
+        mCollapsible = collapsible;
+        invalidate();
     }
 
     /**
@@ -931,6 +948,15 @@ public class RangeBar extends View {
     }
 
     /**
+     * Gets the collapsibility of the bar.
+     *
+     * @return true if the bar is collapsible.
+     */
+    public boolean isCollapsible() {
+        return mCollapsible;
+    }
+
+    /**
      * Gets the type of the bar.
      *
      * @return true if rangebar, false if seekbar.
@@ -1073,6 +1099,7 @@ public class RangeBar extends View {
             mActiveCircleColor = mCircleColor;
             mTickColor = ta.getColor(R.styleable.RangeBar_tickColor, DEFAULT_TICK_COLOR);
             mActiveTickColor = mTickColor;
+            mCollapsible = ta.getBoolean(R.styleable.RangeBar_collapsible, DEFAULT_COLLAPSIBLE);
             mConnectingLineWeight = ta.getDimension(R.styleable.RangeBar_connectingLineWeight,
                     DEFAULT_CONNECTING_LINE_WEIGHT_PX);
             mConnectingLineColor = ta.getColor(R.styleable.RangeBar_connectingLineColor,
@@ -1232,15 +1259,29 @@ public class RangeBar extends View {
      */
     private void onActionDown(float x, float y) {
         if (mIsRangeBar) {
-            if (!mRightThumb.isPressed() && mLeftThumb.isInTargetZone(x, y)) {
+            // Determine which of the two pins we could press
+            boolean leftValid = mLeftThumb.isInTargetZone(x, y) && !mRightThumb.isPressed();
+            boolean rightValid = mRightThumb.isInTargetZone(x, y) && !mLeftThumb.isPressed();
 
+            // If both thumbs are within the target zone and neither is pressed, pick the closest one
+            if (leftValid && rightValid) {
+                float leftDelta = Math.abs(mLeftThumb.getX() - x);
+                float rightDelta = Math.abs(mRightThumb.getX() - x);
+
+                if (leftDelta < rightDelta) {
+                    pressPin(mLeftThumb);
+                } else {
+                    pressPin(mRightThumb);
+                }
+            } else if (leftValid) {
+                // Only left is valid, press it
                 pressPin(mLeftThumb);
-
-            } else if (!mLeftThumb.isPressed() && mRightThumb.isInTargetZone(x, y)) {
-
+            } else if (rightValid) {
+                // Only right is valid, press it
                 pressPin(mRightThumb);
             }
         } else {
+            // Can only move the right thumb for a seekbar
             if (mRightThumb.isInTargetZone(x, y)) {
                 pressPin(mRightThumb);
             }
@@ -1302,12 +1343,30 @@ public class RangeBar extends View {
      * @param x the x-coordinate of the move event
      */
     private void onActionMove(float x) {
-
-        // Move the pressed thumb to the new x-position.
+        // Move the pressed thumb to the new x-position; only allow moving the left thumb if we are a range bar
         if (mIsRangeBar && mLeftThumb.isPressed()) {
             movePin(mLeftThumb, x);
         } else if (mRightThumb.isPressed()) {
             movePin(mRightThumb, x);
+        }
+
+        // Correct pin indices if we've moved too far and we're not collapsible
+        if (mIsRangeBar && !mCollapsible) {
+            // Get the new coordinate values and current tick distance
+            float leftX = mLeftThumb.getX();
+            float rightX = mRightThumb.getX();
+            float tickDistance = mBar.getTickDistance();
+
+            // Check to see if they are now too close
+            if (leftX + tickDistance > rightX) {
+                if (mLeftThumb.isPressed()) {
+                    // Set left thumb position to the tick left of the right pin
+                    movePin(mLeftThumb, rightX - tickDistance);
+                } else if (mRightThumb.isPressed()) {
+                    // Set right thumb position to the tick right of the left pin
+                    movePin(mRightThumb, leftX + tickDistance);
+                }
+            }
         }
 
         // If the thumbs have switched order, fix the references.

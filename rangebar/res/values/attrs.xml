@@ -7,6 +7,7 @@
         <attr name="tickHeight" format="dimension" />
         <attr name="tickColor" format="color" />
         <attr name="barWeight" format="dimension" />
+        <attr name="collapsible" format="boolean"/>
         <attr name="rangeBarColor" format="reference|color" />
         <attr name="textColor" format="reference|color" />
         <attr name="pinColor" format="reference|color" />

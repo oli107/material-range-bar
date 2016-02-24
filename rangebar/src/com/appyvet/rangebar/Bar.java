@@ -145,6 +145,14 @@ public class Bar {
         return (int) ((thumb.getX() - mLeftX + mTickDistance / 2f) / mTickDistance);
     }
 
+    /**
+     * Gets the current tick distance in pixels.
+     *
+     * @return the tick distance in pixels.
+     */
+    public float getTickDistance() {
+        return mTickDistance;
+    }
 
     /**
      * Set the number of ticks that will appear in the RangeBar.
