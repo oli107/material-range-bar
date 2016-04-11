@@ -33,6 +33,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -136,9 +137,11 @@ public class RangeBar extends View {
     // setThumbIndices() is called, to correspond with intended usage
     private boolean mFirstSetTickCount = true;
 
-    private int mDefaultWidth = 500;
+    private final DisplayMetrics mDisplayMetrices = getContext().getResources().getDisplayMetrics();
 
-    private int mDefaultHeight = 150;
+    private int mDefaultWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250, mDisplayMetrices);
+
+    private int mDefaultHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75, mDisplayMetrices);
 
     private int mTickCount = (int) ((mTickEnd - mTickStart) / mTickInterval) + 1;
 
