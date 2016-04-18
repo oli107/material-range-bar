@@ -200,6 +200,10 @@ public class RangeBar extends View {
         }
     };
 
+
+    //True Range Variables
+
+
     // Constructors ////////////////////////////////////////////////////////////
 
     public RangeBar(Context context) {
@@ -627,6 +631,51 @@ public class RangeBar extends View {
     }
 
     /**
+     * Sets the start & end tick in the RangeBar.
+     * This is useful to prevent exceptions when you set start before end or vice versa and results in invalid values due to sequence.
+     *
+     * @param tickStart Integer specifying the number of ticks.
+     * @param tickEnd Integer specifying the number of ticks.
+     */
+    public void setTicks(float tickStart, float tickEnd)
+    {
+        int tickCount = (int) ((tickEnd - tickStart) / mTickInterval) + 1;
+        if (isValidTickCount(tickCount)) {
+            mTickCount = tickCount;
+            mTickStart = tickStart;
+            mTickEnd = tickEnd;
+
+            // Prevents resetting the indices when creating new activity, but
+            // allows it on the first setting.
+            if (mFirstSetTickCount) {
+                mLeftIndex = 0;
+                mRightIndex = mTickCount - 1;
+
+                if (mListener != null) {
+                    mListener.onRangeChangeListener(this, mLeftIndex, mRightIndex,
+                            getPinValue(mLeftIndex),
+                            getPinValue(mRightIndex));
+                }
+            }
+            if (indexOutOfRange(mLeftIndex, mRightIndex)) {
+                mLeftIndex = 0;
+                mRightIndex = mTickCount - 1;
+
+                if (mListener != null) {
+                    mListener.onRangeChangeListener(this, mLeftIndex, mRightIndex,
+                            getPinValue(mLeftIndex),
+                            getPinValue(mRightIndex));
+                }
+            }
+
+            createBar();
+            createPins();
+        } else {
+            Log.e(TAG, "tickCount less than 2; invalid tickCount.");
+            throw new IllegalArgumentException("tickCount less than 2; invalid tickCount.");
+        }
+    }
+    /**
      * Sets the height of the ticks in the range bar.
      *
      * @param tickHeight Float specifying the height of each tick mark in dp.
@@ -636,6 +685,8 @@ public class RangeBar extends View {
         mTickHeightDP = tickHeight;
         createBar();
     }
+
+
 
     /**
      * Set the weight of the bar line and the tick lines in the range bar.
