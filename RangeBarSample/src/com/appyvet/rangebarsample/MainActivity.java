@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements
         ColorPickerDialog.OnColorSelectedListener {
@@ -107,6 +108,20 @@ public class MainActivity extends Activity implements
                 rightIndexValue.setText("" + rightPinIndex);
             }
 
+        });
+
+        rangebar.setThumbMoveListener(new RangeBar.OnThumbMoveListener() {
+            @Override
+            public void onThumbMovingStart(RangeBar rangeBar, boolean isLeftThumb) {
+                String toast = (isLeftThumb ? "Left" : "Right") + " thumb starts moving";
+                Toast.makeText(MainActivity.this, toast, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onThumbMovingStop(RangeBar rangeBar, boolean isLeftThumb) {
+                String toast = (isLeftThumb ? "Left" : "Right") + " thumb stops moving";
+                Toast.makeText(MainActivity.this, toast, Toast.LENGTH_SHORT).show();
+            }
         });
 
         // Sets the indices themselves upon input from the user
