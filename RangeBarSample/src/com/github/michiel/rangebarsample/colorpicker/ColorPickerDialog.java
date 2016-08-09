@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.appyvet.rangebarsample.colorpicker;
+package com.github.michiel.rangebarsample.colorpicker;
 
-import com.appyvet.rangebarsample.Component;
-import com.appyvet.rangebarsample.R;
+import com.github.michiel.rangebarsample.Component;
+import com.github.michiel.rangebarsample.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
