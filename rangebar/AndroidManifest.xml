@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.appyvet.rangebar"
-          android:versionCode="2"
-          android:versionName="1.1">
+          package="com.mick.rangebar"
+          android:versionCode="1"
+          android:versionName="1.0">
 
 </manifest>
