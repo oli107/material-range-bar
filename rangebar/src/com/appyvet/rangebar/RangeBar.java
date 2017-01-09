@@ -132,6 +132,10 @@ public class RangeBar extends View {
 
     private float mMaxPinFont = DEFAULT_MAX_PIN_FONT_SP;
 
+    //defines left-to-right or right-to-left support
+    //1 for LTR and 2 for RTL(other value defaults to LTR)
+    private int mSupport;
+
     // setTickCount only resets indices before a thumb has been pressed or a
     // setThumbIndices() is called, to correspond with intended usage
     private boolean mFirstSetTickCount = true;
@@ -253,6 +257,9 @@ public class RangeBar extends View {
         bundle.putFloat("MIN_PIN_FONT", mMinPinFont);
         bundle.putFloat("MAX_PIN_FONT", mMaxPinFont);
 
+        bundle.putInt("SUPPORT", mSupport);
+
+
         return bundle;
     }
 
@@ -289,6 +296,8 @@ public class RangeBar extends View {
 
             mMinPinFont = bundle.getFloat("MIN_PIN_FONT");
             mMaxPinFont = bundle.getFloat("MAX_PIN_FONT");
+
+            mSupport = bundle.getInt("SUPPORT", 1);
 
             setRangePinsByIndices(mLeftIndex, mRightIndex);
             super.onRestoreInstanceState(bundle.getParcelable("instanceState"));
@@ -361,14 +370,20 @@ public class RangeBar extends View {
 
         final float barLength = w - (2 * marginLeft);
         mBar = new Bar(ctx, marginLeft, yPos, barLength, mTickCount, mTickHeightDP, mTickColor,
-                mBarWeight, mBarColor);
+                mBarWeight, mBarColor, mSupport);
 
         // Initialize thumbs to the desired indices
         if (mIsRangeBar) {
-            mLeftThumb.setX(marginLeft + (mLeftIndex / (float) (mTickCount - 1)) * barLength);
+            if(mSupport == 1)
+                mLeftThumb.setX(marginLeft + (mLeftIndex / (float) (mTickCount - 1)) * barLength);
+            else
+                mLeftThumb.setX(marginLeft + (mRightIndex / (float) (mTickCount - 1)) * barLength);
             mLeftThumb.setXValue(getPinValue(mLeftIndex));
         }
-        mRightThumb.setX(marginLeft + (mRightIndex / (float) (mTickCount - 1)) * barLength);
+        if(mSupport == 1)
+            mRightThumb.setX(marginLeft + (mRightIndex / (float) (mTickCount - 1)) * barLength);
+        else
+            mRightThumb.setX(marginLeft + (mLeftIndex / (float) (mTickCount - 1)) * barLength);
         mRightThumb.setXValue(getPinValue(mRightIndex));
 
         // Set the thumb indices.
@@ -1043,8 +1058,13 @@ public class RangeBar extends View {
                 mTickStart = tickStart;
                 mTickEnd = tickEnd;
                 mTickInterval = tickInterval;
-                mLeftIndex = 0;
-                mRightIndex = mTickCount - 1;
+                if(mSupport == 1) {
+                    mLeftIndex = 0;
+                    mRightIndex = mTickCount - 1;
+                } else {
+                    mRightIndex = 0;
+                    mLeftIndex = mTickCount - 1;
+                }
 
                 if (mListener != null) {
                     mListener.onRangeChangeListener(this, mLeftIndex, mRightIndex,
@@ -1098,6 +1118,13 @@ public class RangeBar extends View {
                     DEFAULT_MAX_PIN_FONT_SP * density);
 
             mIsRangeBar = ta.getBoolean(R.styleable.RangeBar_rangeBar, true);
+
+            mSupport = ta.getInt(R.styleable.RangeBar_support, 1);
+            if(mSupport!=1 && mSupport!=2) {
+                mSupport = 1;
+                Log.d(TAG, "support different from constants 1 or 2; XML input ignored; LTR default");
+            }
+
         } finally {
             ta.recycle();
         }
@@ -1115,7 +1142,8 @@ public class RangeBar extends View {
                 mTickHeightDP,
                 mTickColor,
                 mBarWeight,
-                mBarColor);
+                mBarColor,
+                mSupport);
         invalidate();
     }
 
@@ -1325,10 +1353,16 @@ public class RangeBar extends View {
         final int componentRight = getRight() - getPaddingRight() - componentLeft;
 
         if (x <= componentLeft) {
-            newLeftIndex = 0;
+            if(mSupport == 1)
+                newLeftIndex = 0;
+            else
+                newLeftIndex = getTickCount() - 1;
             movePin(mLeftThumb, mBar.getLeftX());
         } else if (x >= componentRight) {
-            newRightIndex = getTickCount() - 1;
+            if(mSupport == 1)
+                mRightIndex = getTickCount() - 1;
+            else
+                mRightIndex = 0;
             movePin(mRightThumb, mBar.getRightX());
         }
         /// end added code

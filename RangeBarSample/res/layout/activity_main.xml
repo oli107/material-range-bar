@@ -30,6 +30,7 @@
             custom:tickEnd="10"
             custom:temporaryPins="false"
             custom:pinMaxFont="10sp"
+            custom:support="ltr"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"/>
 

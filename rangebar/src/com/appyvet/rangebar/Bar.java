@@ -43,6 +43,8 @@ public class Bar {
 
     private final float mTickHeight;
 
+    private int mSupport;
+
     // Constructor /////////////////////////////////////////////////////////////
 
 
@@ -58,7 +60,9 @@ public class Bar {
      * @param tickColor    the color of each tick
      * @param barWeight    the weight of the bar
      * @param barColor     the color of the bar
+     * @param support     1 for left ro right and 2 for right to left support
      */
+
     public Bar(Context ctx,
             float x,
             float y,
@@ -67,7 +71,8 @@ public class Bar {
             float tickHeightDP,
             int tickColor,
             float barWeight,
-            int barColor) {
+            int barColor,
+            int support) {
 
         mLeftX = x;
         mRightX = x + length;
@@ -88,6 +93,8 @@ public class Bar {
         mTickPaint.setColor(tickColor);
         mTickPaint.setStrokeWidth(barWeight);
         mTickPaint.setAntiAlias(true);
+
+        mSupport = support;
     }
 
     // Package-Private Methods /////////////////////////////////////////////////
@@ -131,7 +138,11 @@ public class Bar {
 
         final int nearestTickIndex = getNearestTickIndex(thumb);
 
-        return mLeftX + (nearestTickIndex * mTickDistance);
+        if(mSupport == 1)
+            return mLeftX + (nearestTickIndex * mTickDistance);
+        else
+            return mRightX - (nearestTickIndex * mTickDistance);
+
     }
 
     /**
@@ -142,7 +153,12 @@ public class Bar {
      */
     public int getNearestTickIndex(PinView thumb) {
 
-        return (int) ((thumb.getX() - mLeftX + mTickDistance / 2f) / mTickDistance);
+        //return (int) ((thumb.getX() - mLeftX + mTickDistance / 2f) / mTickDistance);
+//        return Math.round((mRightX - thumb.getX() - mTickDistance / 2f) / mTickDistance);
+        if(mSupport == 1)
+            return (int) ((thumb.getX() - mLeftX + mTickDistance / 2f) / mTickDistance);
+        else
+            return (int) ((mRightX - thumb.getX() + mTickDistance / 2f) / mTickDistance);
     }
 
 

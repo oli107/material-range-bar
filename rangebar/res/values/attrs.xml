@@ -21,6 +21,10 @@
         <attr name="connectingLineWeight" format="dimension" />
         <attr name="connectingLineColor" format="reference|color" />
         <attr name="pinRadius" format="dimension" />
+        <attr name="support" format="integer">
+            <enum name="ltr" value="1"/>
+            <enum name="rtl" value="2"/>
+        </attr>
     </declare-styleable>
 
 </resources>
