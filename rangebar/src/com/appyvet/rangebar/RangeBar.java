@@ -507,7 +507,7 @@ public class RangeBar extends View {
     /**
      * Sets the start tick in the RangeBar.
      *
-     * @param tickStart Integer specifying the number of ticks.
+     * @param tickStart Float specifying the value of the starting tick.
      */
     public void setTickStart(float tickStart) {
         int tickCount = (int) ((mTickEnd - tickStart) / mTickInterval) + 1;
@@ -541,7 +541,8 @@ public class RangeBar extends View {
             createBar();
             createPins();
         } else {
-            Log.e(TAG, "tickCount less than 2; invalid tickCount.");
+            Log.e(TAG, "tickCount less than 2; invalid tickCount. mTickEnd="+mTickEnd
+                    + "; Check mTickEnd default value or XML attributes");
             throw new IllegalArgumentException("tickCount less than 2; invalid tickCount.");
         }
     }
@@ -549,7 +550,7 @@ public class RangeBar extends View {
     /**
      * Sets the start tick in the RangeBar.
      *
-     * @param tickInterval Integer specifying the number of ticks.
+     * @param tickInterval Float specifying the size of the interval between two consecutive ticks.
      */
     public void setTickInterval(float tickInterval) {
         int tickCount = (int) ((mTickEnd - mTickStart) / tickInterval) + 1;
@@ -589,7 +590,7 @@ public class RangeBar extends View {
     /**
      * Sets the end tick in the RangeBar.
      *
-     * @param tickEnd Integer specifying the number of ticks.
+     * @param tickEnd Float specifying the value of the ending tick.
      */
     public void setTickEnd(float tickEnd) {
         int tickCount = (int) ((tickEnd - mTickStart) / mTickInterval) + 1;
@@ -621,7 +622,53 @@ public class RangeBar extends View {
             createBar();
             createPins();
         } else {
-            Log.e(TAG, "tickCount less than 2; invalid tickCount.");
+            Log.e(TAG, "tickCount less than 2; invalid tickCount. mTickStart="+mTickStart
+                    + "; Check mTickStart default value or XML attributes");
+            throw new IllegalArgumentException("tickCount less than 2; invalid tickCount.");
+        }
+    }
+
+    /**
+     * Sets both the start and end tick in the RangeBar.
+     *
+     * @param tickStart Float specifying the value of the starting tick.
+     * @param tickEnd Float specifying the value of the ending tick.
+     */
+    public void setTicks (float tickStart, float tickEnd) {
+        int tickCount = (int) ((tickEnd - tickStart) / mTickInterval) + 1;
+        if (isValidTickCount(tickCount)) {
+            mTickCount = tickCount;
+            mTickStart = tickStart;
+            mTickEnd = tickEnd;
+
+            // Prevents resetting the indices when creating new activity, but
+            // allows it on the first setting.
+            if (mFirstSetTickCount) {
+                mLeftIndex = 0;
+                mRightIndex = mTickCount - 1;
+
+                if (mListener != null) {
+                    mListener.onRangeChangeListener(this, mLeftIndex, mRightIndex,
+                            getPinValue(mLeftIndex),
+                            getPinValue(mRightIndex));
+                }
+            }
+            if (indexOutOfRange(mLeftIndex, mRightIndex)) {
+                mLeftIndex = 0;
+                mRightIndex = mTickCount - 1;
+
+                if (mListener != null) {
+                    mListener.onRangeChangeListener(this, mLeftIndex, mRightIndex,
+                            getPinValue(mLeftIndex),
+                            getPinValue(mRightIndex));
+                }
+            }
+
+            createBar();
+            createPins();
+        } else {
+            Log.e(TAG, "tickCount less than 2; invalid tickCount. mTickStart=" + mTickStart
+                     +" and mTickEnd="+mTickEnd);
             throw new IllegalArgumentException("tickCount less than 2; invalid tickCount.");
         }
     }
