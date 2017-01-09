@@ -998,10 +998,11 @@ public class RangeBar extends View {
             mTickColor = mActiveTickColor;
         }
 
+        super.setEnabled(enabled);
+
         createBar();
         createPins();
         createConnectingLine();
-        super.setEnabled(enabled);
     }
 
     public void setPinTextFormatter(PinTextFormatter pinTextFormatter) {
@@ -1137,16 +1138,21 @@ public class RangeBar extends View {
     private void createPins() {
         Context ctx = getContext();
         float yPos = getYPos();
+        float expandedPinRadius = 0.0f;
+
+        if(isEnabled()) {
+            expandedPinRadius = mExpandedPinRadius / getResources().getDisplayMetrics().density;
+        }
 
         if (mIsRangeBar) {
             mLeftThumb = new PinView(ctx);
-            mLeftThumb.init(ctx, yPos, 0, mPinColor, mTextColor, mCircleSize, mCircleColor,
-                    mMinPinFont, mMaxPinFont, false);
+            mLeftThumb.init(ctx, yPos, expandedPinRadius, mPinColor, mTextColor, mCircleSize, mCircleColor,
+                    mMinPinFont, mMaxPinFont, mArePinsTemporary);
         }
         mRightThumb = new PinView(ctx);
         mRightThumb
-                .init(ctx, yPos, 0, mPinColor, mTextColor, mCircleSize, mCircleColor, mMinPinFont,
-                        mMaxPinFont, false);
+                .init(ctx, yPos, expandedPinRadius, mPinColor, mTextColor, mCircleSize, mCircleColor, mMinPinFont,
+                        mMaxPinFont, mArePinsTemporary);
 
         float marginLeft = getMarginLeft();
         float barLength = getBarLength();
