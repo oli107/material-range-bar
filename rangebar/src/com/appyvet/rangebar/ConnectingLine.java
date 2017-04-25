@@ -41,7 +41,7 @@ public class ConnectingLine {
      * @param connectingLineColor  the color of the line
      */
     public ConnectingLine(Context ctx, float y, float connectingLineWeight,
-            int connectingLineColor) {
+                          int connectingLineColor) {
 
         final Resources res = ctx.getResources();
 
@@ -81,5 +81,29 @@ public class ConnectingLine {
      */
     public void draw(Canvas canvas, float leftMargin, PinView rightThumb) {
         canvas.drawLine(leftMargin, mY, rightThumb.getX(), mY, mPaint);
+    }
+
+    /**
+     * Draw the connecting line between the left / right edges to each respective thumb in the inverse rangebar
+     *
+     * @param canvas        the Canvas to draw to
+     * @param leftThumb     the left thumb
+     * @param leftMargin    the left margin
+     * @param rightThumb    the right thumb
+     * @param rightMargin   the right margin
+     */
+    public void draw(Canvas canvas, PinView leftThumb, float leftMargin, PinView rightThumb, float rightMargin) {
+
+        float leftThumbX = leftThumb.getX();
+        float rightThumbX = rightThumb.getX();
+
+        if (leftThumbX > rightThumbX) {
+            canvas.drawLine(leftMargin, mY, rightThumbX, mY, mPaint);
+            canvas.drawLine(rightMargin, mY, leftThumbX, mY, mPaint);
+        }
+        else {
+            canvas.drawLine(leftMargin, mY, leftThumbX, mY, mPaint);
+            canvas.drawLine(rightMargin, mY, rightThumbX, mY, mPaint);
+        }
     }
 }
