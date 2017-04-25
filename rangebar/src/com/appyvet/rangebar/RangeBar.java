@@ -1309,11 +1309,11 @@ public class RangeBar extends View {
 
             if (leftThumbXDistance < rightThumbXDistance) {
                 if (mIsRangeBar) {
-                    mLeftThumb.setX(x);
+                    movePin(mLeftThumb, x);
                     releasePin(mLeftThumb);
                 }
             } else {
-                mRightThumb.setX(x);
+                movePin(mRightThumb, x);
                 releasePin(mRightThumb);
             }
 
