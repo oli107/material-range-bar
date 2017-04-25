@@ -160,6 +160,8 @@ public class RangeBar extends View {
 
     private OnRangeBarTextListener mPinTextListener;
 
+    private OnThumbMoveListener mThumbMoveListener;
+
     private HashMap<Float, String> mTickMap;
 
     private int mLeftIndex;
@@ -496,6 +498,16 @@ public class RangeBar extends View {
     public void setPinTextListener(OnRangeBarTextListener mPinTextListener) {
         this.mPinTextListener = mPinTextListener;
     }
+
+    /**
+     * Sets a listener to receive notifications of thumb moving.
+     * @param thumbMoveListener the thumb move notification listener; null to remove any existing
+     *                          listener
+     */
+    public void setThumbMoveListener(OnThumbMoveListener thumbMoveListener) {
+        this.mThumbMoveListener = thumbMoveListener;
+    }
+
 
 
     public void setFormatter(IRangeBarFormatter formatter) {
@@ -1274,7 +1286,6 @@ public class RangeBar extends View {
             if (!mRightThumb.isPressed() && mLeftThumb.isInTargetZone(x, y)) {
 
                 pressPin(mLeftThumb);
-
             } else if (!mLeftThumb.isPressed() && mRightThumb.isInTargetZone(x, y)) {
 
                 pressPin(mRightThumb);
@@ -1413,6 +1424,14 @@ public class RangeBar extends View {
             animator.start();
         }
 
+        if (mThumbMoveListener != null) {
+            if (thumb == mLeftThumb) {
+                mThumbMoveListener.onThumbMovingStart(this, true);
+            } else {
+                mThumbMoveListener.onThumbMovingStart(this, false);
+            }
+        }
+
         thumb.press();
     }
 
@@ -1444,6 +1463,14 @@ public class RangeBar extends View {
             animator.start();
         } else {
             invalidate();
+        }
+
+        if (mThumbMoveListener != null) {
+            if (thumb == mLeftThumb) {
+                mThumbMoveListener.onThumbMovingStop(this, true);
+            } else {
+                mThumbMoveListener.onThumbMovingStop(this, false);
+            }
         }
 
         thumb.release();
@@ -1516,6 +1543,17 @@ public class RangeBar extends View {
     public static interface OnRangeBarTextListener {
 
         public String getPinValue(RangeBar rangeBar, int tickIndex);
+    }
+
+    /**
+     * @author Xiaofei
+     *         A callback that notify the observer range bar start/stop dragging
+     *         This callback will avoid do some time-consuming job too frequently
+     */
+    public interface OnThumbMoveListener {
+        void onThumbMovingStart(RangeBar rangeBar, boolean isLeftThumb);
+
+        void onThumbMovingStop(RangeBar rangeBar, boolean isLeftThumb);
     }
 
 
