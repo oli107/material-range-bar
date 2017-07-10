@@ -291,10 +291,12 @@ class PinView extends View {
             calibrateTextSize(mTextPaint, text, mBounds.width());
             mTextPaint.getTextBounds(text, 0, text.length(), mBounds);
             mTextPaint.setTextAlign(Paint.Align.CENTER);
+
             mPin.setColorFilter(mPinFilter);
             mPin.draw(canvas);
+            float pinCenterY = mY - mPinRadiusPx -  mPinPadding;
             canvas.drawText(text,
-                    mX, mY - mPinRadiusPx - mPinPadding + mTextYPadding,
+                    mX, pinCenterY + mBounds.height() / 2.0f,
                     mTextPaint);
         }
         super.draw(canvas);
