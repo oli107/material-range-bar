@@ -168,6 +168,8 @@ public class RangeBar extends View {
 
     private boolean mIsRangeBar = true;
 
+    private boolean mIsFromRight = false; // when we are not a range bar, are we showing the connecting line from the right or the left (default)
+
     private float mPinPadding = DEFAULT_PIN_PADDING_DP;
 
     private float mBarPaddingBottom = DEFAULT_BAR_PADDING_BOTTOM_DP;
@@ -252,6 +254,7 @@ public class RangeBar extends View {
         bundle.putFloat("PIN_PADDING", mPinPadding);
         bundle.putFloat("BAR_PADDING_BOTTOM", mBarPaddingBottom);
         bundle.putBoolean("IS_RANGE_BAR", mIsRangeBar);
+        bundle.putBoolean("IS_FROM_RIGHT", mIsFromRight);
         bundle.putBoolean("ARE_PINS_TEMPORARY", mArePinsTemporary);
         bundle.putInt("LEFT_INDEX", mLeftIndex);
         bundle.putInt("RIGHT_INDEX", mRightIndex);
@@ -291,6 +294,7 @@ public class RangeBar extends View {
             mPinPadding = bundle.getFloat("PIN_PADDING");
             mBarPaddingBottom = bundle.getFloat("BAR_PADDING_BOTTOM");
             mIsRangeBar = bundle.getBoolean("IS_RANGE_BAR");
+            mIsFromRight = bundle.getBoolean("IS_FROM_RIGHT");
             mArePinsTemporary = bundle.getBoolean("ARE_PINS_TEMPORARY");
 
             mLeftIndex = bundle.getInt("LEFT_INDEX");
@@ -405,18 +409,25 @@ public class RangeBar extends View {
         super.onDraw(canvas);
 
         mBar.draw(canvas);
+
+        float conLineLeft, conLineRight;
         if (mIsRangeBar) {
-            mConnectingLine.draw(canvas, mLeftThumb, mRightThumb);
-            if (drawTicks) {
-                mBar.drawTicks(canvas);
-            }
-            mLeftThumb.draw(canvas);
+            conLineLeft = mLeftThumb.getX();
+            conLineRight = mRightThumb.getX();
         } else {
-            mConnectingLine.draw(canvas, getMarginLeft(), mRightThumb);
-            if (drawTicks) {
-                mBar.drawTicks(canvas);
-            }
+            conLineLeft = mIsFromRight ? mRightThumb.getX() : getHorizontalMargin();
+            conLineRight = mIsFromRight ? getWidth() - getHorizontalMargin() : mRightThumb.getX();
         }
+
+        mConnectingLine.draw(canvas, conLineLeft, conLineRight);
+        if (drawTicks) {
+            mBar.drawTicks(canvas);
+        }
+
+        if (mIsRangeBar) {
+            mLeftThumb.draw(canvas);
+        }
+
         mRightThumb.draw(canvas);
 
     }
@@ -1127,7 +1138,6 @@ public class RangeBar extends View {
             mBarPaddingBottom = ta.getDimension(R.styleable.RangeBar_rangeBarPaddingBottom,
                     TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                             DEFAULT_BAR_PADDING_BOTTOM_DP, getResources().getDisplayMetrics()));
-            mIsRangeBar = ta.getBoolean(R.styleable.RangeBar_rangeBar, true);
             mArePinsTemporary = ta.getBoolean(R.styleable.RangeBar_temporaryPins, true);
 
             float density = getResources().getDisplayMetrics().density;
@@ -1137,6 +1147,7 @@ public class RangeBar extends View {
                     DEFAULT_MAX_PIN_FONT_SP * density);
 
             mIsRangeBar = ta.getBoolean(R.styleable.RangeBar_rangeBar, true);
+            mIsFromRight = ta.getBoolean(R.styleable.RangeBar_fromRight, false);
         } finally {
             ta.recycle();
         }
@@ -1147,7 +1158,7 @@ public class RangeBar extends View {
      */
     private void createBar() {
         mBar = new Bar(getContext(),
-                getMarginLeft(),
+                getHorizontalMargin(),
                 getYPos(),
                 getBarLength(),
                 mTickCount,
@@ -1187,7 +1198,7 @@ public class RangeBar extends View {
                 .init(ctx, yPos, 0, mPinColor, mTextColor, mCircleSize, mCircleColor,mCircleBoundaryColor, mCircleBoundarySize
                         , mMinPinFont, mMaxPinFont, false);
 
-        float marginLeft = getMarginLeft();
+        float marginLeft = getHorizontalMargin();
         float barLength = getBarLength();
 
         // Initialize thumbs to the desired indices
@@ -1206,7 +1217,7 @@ public class RangeBar extends View {
      *
      * @return float marginLeft
      */
-    private float getMarginLeft() {
+    private float getHorizontalMargin() {
         return Math.max(mExpandedPinRadius, mCircleSize);
     }
 
@@ -1225,7 +1236,7 @@ public class RangeBar extends View {
      * @return float barLength
      */
     private float getBarLength() {
-        return (getWidth() - 2 * getMarginLeft());
+        return (getWidth() - 2 * getHorizontalMargin());
     }
 
     /**
