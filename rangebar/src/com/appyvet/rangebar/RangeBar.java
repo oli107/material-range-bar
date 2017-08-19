@@ -1360,7 +1360,7 @@ public class RangeBar extends View {
         int newLeftIndex = mIsRangeBar ? mBar.getNearestTickIndex(mLeftThumb) : 0;
         int newRightIndex = mBar.getNearestTickIndex(mRightThumb);
 
-        final int componentLeft = getLeft() + getPaddingLeft();
+        final int componentLeft = getPaddingLeft();
         final int componentRight = getRight() - getPaddingRight() - componentLeft;
 
         if (x <= componentLeft) {
