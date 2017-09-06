@@ -1,28 +1,28 @@
 <resources>
 
     <declare-styleable name="RangeBar">
-        <attr name="tickStart" format="float"/>
-        <attr name="tickEnd" format="float"/>
-        <attr name="tickInterval" format="float"/>
-        <attr name="tickHeight" format="dimension"/>
-        <attr name="tickColor" format="color"/>
-        <attr name="barWeight" format="dimension"/>
-        <attr name="rangeBarColor" format="reference|color"/>
-        <attr name="textColor" format="reference|color"/>
-        <attr name="pinColor" format="reference|color"/>
-        <attr name="selectorSize" format="dimension"/>
-        <attr name="selectorBoundaryColor" format="reference|color"/>
-        <attr name="selectorBoundarySize" format="dimension"/>
-        <attr name="pinPadding" format="dimension"/>
-        <attr name="pinMinFont" format="dimension"/>
-        <attr name="pinMaxFont" format="dimension"/>
-        <attr name="rangeBarPaddingBottom" format="dimension"/>
-        <attr name="selectorColor" format="reference|color"/>
-        <attr name="rangeBar" format="boolean"/>
-        <attr name="temporaryPins" format="boolean"/>
-        <attr name="connectingLineWeight" format="dimension"/>
-        <attr name="connectingLineColor" format="reference|color"/>
-        <attr name="pinRadius" format="dimension"/>
+        <attr name="mrb_tickStart" format="float"/>
+        <attr name="mrb_tickEnd" format="float"/>
+        <attr name="mrb_tickInterval" format="float"/>
+        <attr name="mrb_tickHeight" format="dimension"/>
+        <attr name="mrb_tickColor" format="color"/>
+        <attr name="mrb_barWeight" format="dimension"/>
+        <attr name="mrb_rangeBarColor" format="reference|color"/>
+        <attr name="mrb_textColor" format="reference|color"/>
+        <attr name="mrb_pinColor" format="reference|color"/>
+        <attr name="mrb_selectorSize" format="dimension"/>
+        <attr name="mrb_selectorBoundaryColor" format="reference|color"/>
+        <attr name="mrb_selectorBoundarySize" format="dimension"/>
+        <attr name="mrb_pinPadding" format="dimension"/>
+        <attr name="mrb_pinMinFont" format="dimension"/>
+        <attr name="mrb_pinMaxFont" format="dimension"/>
+        <attr name="mrb_rangeBarPaddingBottom" format="dimension"/>
+        <attr name="mrb_selectorColor" format="reference|color"/>
+        <attr name="mrb_rangeBar" format="boolean"/>
+        <attr name="mrb_temporaryPins" format="boolean"/>
+        <attr name="mrb_connectingLineWeight" format="dimension"/>
+        <attr name="mrb_connectingLineColor" format="reference|color"/>
+        <attr name="mrb_pinRadius" format="dimension"/>
     </declare-styleable>
 
 </resources>
