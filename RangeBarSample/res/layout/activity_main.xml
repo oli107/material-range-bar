@@ -27,14 +27,14 @@
         android:layout_height="72dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        custom:pinMaxFont="10sp"
-        custom:selectorBoundaryColor="@color/accent"
-        custom:selectorBoundarySize="2dp"
-        custom:selectorSize="10dp"
-        custom:temporaryPins="false"
-        custom:tickEnd="10"
-        custom:tickInterval="1"
-        custom:tickStart="5"/>
+        custom:mrb_pinMaxFont="10sp"
+        custom:mrb_selectorBoundaryColor="@color/accent"
+        custom:mrb_selectorBoundarySize="2dp"
+        custom:mrb_selectorSize="10dp"
+        custom:mrb_temporaryPins="false"
+        custom:mrb_tickEnd="10"
+        custom:mrb_tickInterval="1"
+        custom:mrb_tickStart="5"/>
 
     <include
         layout="@layout/divider"
