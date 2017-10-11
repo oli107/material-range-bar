@@ -26,40 +26,40 @@ Developers can customize the following attributes (both via XML and programatica
 
 ### Tick Properties
 ```
-tickStart | float
-tickEnd | float
-tickInterval | float
-tickHeight | dimension
-tickColor | color
+mrb_tickStart | float
+mrb_tickEnd | float
+mrb_tickInterval | float
+mrb_tickHeight | dimension
+mrb_tickColor | color
 ```
 
 ###  Bar Properties
 ```
-rangeBar | boolean
-barWeight | dimension
-rangeBarColor | reference or color
-barPaddingBottom | dimension
-connectingLineWeight | dimension
-connectingLineColor | reference or color
+mrb_rangeBar | boolean
+mrb_barWeight | dimension
+mrb_rangeBarColor | reference or color
+mrb_barPaddingBottom | dimension
+mrb_connectingLineWeight | dimension
+mrb_connectingLineColor | reference or color
 ```
 
 ### Pin Properties
 ```
-pinPadding | dimension
-pinRadius | dimension
-pinMinFont | dimension
-pinMaxFont | dimension
-pinColor | reference or color
-textColor | reference or color
-temporaryPins | boolean
+mrb_pinPadding | dimension
+mrb_pinRadius | dimension
+mrb_pinMinFont | dimension
+mrb_pinMaxFont | dimension
+mrb_pinColor | reference or color
+mrb_textColor | reference or color
+mrb_temporaryPins | boolean
 ```
 
 ### Selector Properties
 ```
-selectorColor | reference or color
-selectorSize | dimension
-selectorBoundaryColor | reference or color
-selectorBoundarySize | dimension
+mrb_selectorColor | reference or color
+mrb_selectorSize | dimension
+mrb_selectorBoundaryColor | reference or color
+mrb_selectorBoundarySize | dimension
 ```
 
 ### Via runtime only (no XML option)
@@ -78,27 +78,27 @@ Examples
 This is a rangebar with both a lower and upper value
 ```xml
 <com.appyvet.rangebar.RangeBar
-        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rangebar"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        custom:tickStart="5"
-        custom:tickInterval="1"
-        custom:tickEnd="10"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_marginRight="16dp"
+        app:mrb_tickStart="5"
+        app:mrb_tickInterval="1"
+        app:mrb_tickEnd="10" />
 ```
 
 This is a seekbar with only a single value (note rangeBar=false)
 ```xml
 <com.appyvet.rangebar.RangeBar
-        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rangebar"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        custom:rangeBar="false"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_marginRight="16dp"
+        app:mrb_rangeBar="false" />
 ```
 
 ## Adding a listener
