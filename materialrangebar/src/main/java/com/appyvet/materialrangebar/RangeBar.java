@@ -1,14 +1,14 @@
 /*
- * Copyright 2013, Edmodo, Inc. 
+ * Copyright 2013, Edmodo, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License.
  * You may obtain a copy of the License in the LICENSE file, or at:
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" 
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language 
- * governing permissions and limitations under the License. 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
+ * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 
 package com.appyvet.materialrangebar;
@@ -32,6 +32,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -198,6 +199,11 @@ public class RangeBar extends View {
 
     private boolean mArePinsTemporary = true;
 
+    private boolean mDrawPinTextDrawable = true;
+
+    @DrawableRes
+    private int mPinTextDrawableResId;
+
     private PinTextFormatter mPinTextFormatter = new PinTextFormatter() {
         @Override
         public String getText(String value) {
@@ -264,6 +270,8 @@ public class RangeBar extends View {
         bundle.putFloat("MIN_PIN_FONT", mMinPinFont);
         bundle.putFloat("MAX_PIN_FONT", mMaxPinFont);
 
+        bundle.putBoolean("DRAW_PIN_TEXT_DRAWABLE", mDrawPinTextDrawable);
+        bundle.putInt("PIN_TEXT_DRAWABLE_RES_ID", mPinTextDrawableResId);
         return bundle;
     }
 
@@ -302,6 +310,9 @@ public class RangeBar extends View {
 
             mMinPinFont = bundle.getFloat("MIN_PIN_FONT");
             mMaxPinFont = bundle.getFloat("MAX_PIN_FONT");
+
+            mDrawPinTextDrawable = bundle.getBoolean("DRAW_PIN_TEXT_DRAWABLE");
+            mPinTextDrawableResId = bundle.getInt("PIN_TEXT_DRAWABLE_RES_ID");
 
             setRangePinsByIndices(mLeftIndex, mRightIndex);
             super.onRestoreInstanceState(bundle.getParcelable("instanceState"));
@@ -362,12 +373,12 @@ public class RangeBar extends View {
             mLeftThumb = new PinView(ctx);
             mLeftThumb.setFormatter(mFormatter);
             mLeftThumb.init(ctx, yPos, expandedPinRadius, mPinColor, mTextColor, mCircleSize,
-                    mCircleColor, mCircleBoundaryColor, mCircleBoundarySize, mMinPinFont, mMaxPinFont, mArePinsTemporary);
+                    mCircleColor, mCircleBoundaryColor, mCircleBoundarySize, mMinPinFont, mMaxPinFont, mArePinsTemporary, mDrawPinTextDrawable, mPinTextDrawableResId);
         }
         mRightThumb = new PinView(ctx);
         mRightThumb.setFormatter(mFormatter);
         mRightThumb.init(ctx, yPos, expandedPinRadius, mPinColor, mTextColor, mCircleSize,
-                mCircleColor, mCircleBoundaryColor, mCircleBoundarySize, mMinPinFont, mMaxPinFont, mArePinsTemporary);
+                mCircleColor, mCircleBoundaryColor, mCircleBoundarySize, mMinPinFont, mMaxPinFont, mArePinsTemporary, mDrawPinTextDrawable, mPinTextDrawableResId);
 
         // Create the underlying bar.
         final float marginLeft = Math.max(mExpandedPinRadius, mCircleSize);
@@ -1129,12 +1140,10 @@ public class RangeBar extends View {
             mPinColor = ta.getColor(R.styleable.RangeBar_mrb_pinColor, DEFAULT_PIN_COLOR);
             mActiveBarColor = mBarColor;
 
-
             mCircleColor = ta.getColor(R.styleable.RangeBar_mrb_selectorColor,
                     DEFAULT_CONNECTING_LINE_COLOR);
             mCircleBoundaryColor = ta.getColor(R.styleable.RangeBar_mrb_selectorBoundaryColor,
                     DEFAULT_CONNECTING_LINE_COLOR);
-
 
             mActiveCircleColor = mCircleColor;
             mTickColor = ta.getColor(R.styleable.RangeBar_mrb_tickColor, DEFAULT_TICK_COLOR);
@@ -1143,7 +1152,6 @@ public class RangeBar extends View {
             mConnectingLineColor = ta.getColor(R.styleable.RangeBar_mrb_connectingLineColor,
                     DEFAULT_CONNECTING_LINE_COLOR);
             mActiveConnectingLineColor = mConnectingLineColor;
-
 
             mIsRangeBar = ta.getBoolean(R.styleable.RangeBar_mrb_rangeBar, true);
             mArePinsTemporary = ta.getBoolean(R.styleable.RangeBar_mrb_temporaryPins, true);
@@ -1155,6 +1163,9 @@ public class RangeBar extends View {
                     DEFAULT_MAX_PIN_FONT_SP * density);
 
             mIsRangeBar = ta.getBoolean(R.styleable.RangeBar_mrb_rangeBar, true);
+
+            mDrawPinTextDrawable = ta.getBoolean(R.styleable.RangeBar_mrb_pinDrawPinTextDrawable, true);
+            mPinTextDrawableResId = ta.getResourceId(R.styleable.RangeBar_mrb_pinTextDrawableRes, 0);
         } finally {
             ta.recycle();
         }
@@ -1198,12 +1209,12 @@ public class RangeBar extends View {
         if (mIsRangeBar) {
             mLeftThumb = new PinView(ctx);
             mLeftThumb.init(ctx, yPos, 0, mPinColor, mTextColor, mCircleSize, mCircleColor, mCircleBoundaryColor, mCircleBoundarySize,
-                    mMinPinFont, mMaxPinFont, false);
+                    mMinPinFont, mMaxPinFont, false, mDrawPinTextDrawable, mPinTextDrawableResId);
         }
         mRightThumb = new PinView(ctx);
         mRightThumb
                 .init(ctx, yPos, 0, mPinColor, mTextColor, mCircleSize, mCircleColor, mCircleBoundaryColor, mCircleBoundarySize
-                        , mMinPinFont, mMaxPinFont, false);
+                        , mMinPinFont, mMaxPinFont, false, mDrawPinTextDrawable, mPinTextDrawableResId);
 
         float marginLeft = getMarginLeft();
         float barLength = getBarLength();
@@ -1519,7 +1530,7 @@ public class RangeBar extends View {
     public interface OnRangeBarChangeListener {
 
         void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex,
-                                   int rightPinIndex, String leftPinValue, String rightPinValue);
+                int rightPinIndex, String leftPinValue, String rightPinValue);
     }
 
     public interface PinTextFormatter {
@@ -1529,7 +1540,7 @@ public class RangeBar extends View {
 
     /**
      * @author robmunro
-     *         A callback that allows getting pin text exernally
+     * A callback that allows getting pin text exernally
      */
     public interface OnRangeBarTextListener {
 
