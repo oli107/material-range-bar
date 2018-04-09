@@ -7,7 +7,7 @@
         android:background="@color/white"
         android:focusableInTouchMode="true"
         android:orientation="vertical"
-        tools:context="com.appyvet.rangebarsample.MainActivity">
+        tools:context="com.bblackbelt.rangebarsample.MainActivity">
 
     <TextView
             android:id="@+id/title"
@@ -19,7 +19,7 @@
             android:textColor="@color/white"
             android:textSize="40sp" />
 
-    <com.appyvet.materialrangebar.RangeBar xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.bblackbelt.materialrangebar.RangeBar xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/rangebar1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

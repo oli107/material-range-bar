@@ -11,7 +11,7 @@
  * governing permissions and limitations under the License.
  */
 
-package com.appyvet.materialrangebar;
+package com.bblackbelt.materialrangebar;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -110,7 +110,7 @@ class PinView extends View {
 
     // Initialization //////////////////////////////////////////////////////////
 
-    public void setFormatter(com.appyvet.materialrangebar.IRangeBarFormatter mFormatter) {
+    public void setFormatter(com.bblackbelt.materialrangebar.IRangeBarFormatter mFormatter) {
         this.formatter = mFormatter;
     }
 

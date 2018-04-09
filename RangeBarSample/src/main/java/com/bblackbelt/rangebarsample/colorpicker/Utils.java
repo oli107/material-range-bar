@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.appyvet.rangebarsample.colorpicker;
+package com.bblackbelt.rangebarsample.colorpicker;
 
 
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
 
-import com.appyvet.rangebarsample.R;
+import com.bblackbelt.rangebarsample.R;
 /**
  * 
  * @author Gabriele Mariotti (gabri.mariotti@gmail.com)

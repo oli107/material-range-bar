@@ -11,7 +11,7 @@
  * governing permissions and limitations under the License.
  */
 
-package com.appyvet.materialrangebar;
+package com.bblackbelt.materialrangebar;
 /*
  * Copyright 2015, Appyvet, Inc.
  *

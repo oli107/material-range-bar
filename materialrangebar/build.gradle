@@ -11,7 +11,7 @@ ext {
     bintrayRepo = 'maven'
     bintrayName = 'MaterialRangebar'
 
-    publishedGroupId = 'com.appyvet'
+    publishedGroupId = 'com.bblackbelt'
     libraryName = 'Material Rangebar'
     artifact = 'materialrangebar'
 
