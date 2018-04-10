@@ -405,12 +405,7 @@ public class RangeBar extends View {
             newLeftIndex = mIsRangeBar ? mBar.getNearestTickIndex(mLeftThumb) : 0;
             newRightIndex = mBar.getNearestTickIndex(mRightThumb);
         } else {
-            if (mIsRangeBar) {
-                mLeftThumb.setX(marginLeft + (mLeftIndex / (float) (mTickCount - 1)) * barLength);
-                mLeftThumb.setXValue(getPinValue(mLeftIndex));
-            }
-            mRightThumb.setX(mLeftThumb.getX() + getThumbDiameter(mLeftThumb));
-            mRightThumb.setXValue(getPinValue(mLeftIndex));
+            initPinsSameIndex();
             newLeftIndex = mLeftIndex;
             newRightIndex = mRightIndex;
         }
@@ -1251,14 +1246,29 @@ public class RangeBar extends View {
             mRightThumb.setX(marginLeft + (mRightIndex / (float) (mTickCount - 1)) * barLength);
             mRightThumb.setXValue(getPinValue(mRightIndex));
         } else {
-            if (mIsRangeBar) {
-                mLeftThumb.setX(marginLeft + (mLeftIndex / (float) (mTickCount - 1)) * barLength);
-                mLeftThumb.setXValue(getPinValue(mLeftIndex));
-            }
-            mRightThumb.setX(mLeftThumb.getX() + getThumbDiameter(mLeftThumb));
-            mRightThumb.setXValue(getPinValue(mLeftIndex));
+            initPinsSameIndex();
         }
         invalidate();
+    }
+
+    private void initPinsSameIndex() {
+        if (mRightIndex == (mTickCount - 1)) {
+            mRightThumb.setX(getMarginLeft() + (mRightIndex / (float) (mTickCount - 1)) * getBarLength());
+            mRightThumb.setXValue(getPinValue(mRightIndex));
+
+            if (mIsRangeBar) {
+                mLeftThumb.setX(mRightThumb.getX() - getThumbDiameter(mRightThumb));
+                mLeftThumb.setXValue(getPinValue(mLeftIndex));
+            }
+        } else {
+            if (mIsRangeBar) {
+                mLeftThumb.setX(getMarginLeft() + (mLeftIndex / (float) (mTickCount - 1)) * getBarLength());
+                mLeftThumb.setXValue(getPinValue(mLeftIndex));
+            }
+
+            mRightThumb.setX(mLeftThumb.getX() + getThumbDiameter(mLeftThumb));
+            mRightThumb.setXValue(getPinValue(mRightIndex));
+        }
     }
 
     /**
