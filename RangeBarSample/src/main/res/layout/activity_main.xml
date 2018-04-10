@@ -28,12 +28,15 @@
             app:mrb_selectorBoundaryColor="@color/accent"
             app:mrb_selectorBoundarySize="2dp"
             app:mrb_pinTextColor="#ACD123"
-            app:mrb_selectorSize="10dp"
-            app:mrb_tickEnd="10"
-            app:mrb_pinDrawPinTextDrawable="true"
+            app:mrb_pinRadius="16dp"
+            app:mrb_pinPadding="16dp"
+            app:mrb_selectorSize="16dp"
+            app:mrb_tickEnd="32"
+            app:mrb_pinDrawPinTextDrawable="false"
             app:mrb_pinTextDrawableRes="@drawable/roundrect"
+            app:mrb_preventPinOverlapping="true"
             app:mrb_tickInterval="1"
-            app:mrb_tickStart="5" />
+            app:mrb_tickStart="0" />
 
     <include
             layout="@layout/divider"

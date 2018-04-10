@@ -1,5 +1,4 @@
 /*
- * Copyright 2014, Appyvet, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License.
  * You may obtain a copy of the License in the LICENSE file, or at:
@@ -232,6 +231,10 @@ class PinView extends View {
         mValue = x;
     }
 
+    public String getXValue() {
+        return mValue;
+    }
+
     /**
      * Determine if the pin is pressed
      *
@@ -282,6 +285,10 @@ class PinView extends View {
     public boolean isInTargetZone(float x, float y) {
         return (Math.abs(x - mX) <= mTargetRadiusPx
                 && Math.abs(y - mY + mPinPadding) <= mTargetRadiusPx);
+    }
+
+    public float getPinWidth() {
+        return (2 * mPinRadiusPx) + (mPinPadding / 2);
     }
 
     //Draw the circle regardless of pressed state. If pin size is >0 then also draw the pin and text
