@@ -23,6 +23,9 @@
         <attr name="mrb_connectingLineWeight" format="dimension"/>
         <attr name="mrb_connectingLineColor" format="reference|color"/>
         <attr name="mrb_pinRadius" format="dimension"/>
+        <attr name="mrb_pinTextDrawableRes" format="reference"/>
+        <attr name="mrb_pinDrawPinTextDrawable" format="boolean"/>
+        <attr name="mrb_preventPinOverlapping" format="boolean"/>
     </declare-styleable>
 
 </resources>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.appyvet.rangebarsample.colorpicker;
+package com.bblackbelt.rangebarsample.colorpicker;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -25,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
-import com.appyvet.rangebarsample.R;
+import com.bblackbelt.rangebarsample.R;
 
 
 /**
@@ -58,7 +58,7 @@ public class ColorPickerPalette extends TableLayout {
     public void init(int size, int columns, ColorPickerSwatch.OnSwatchColorSelectedListener listener) {
         mNumColumns = columns;
         Resources res = getResources();
-        if (size == com.appyvet.rangebarsample.colorpicker.ColorPickerDialog.SIZE_LARGE) {
+        if (size == com.bblackbelt.rangebarsample.colorpicker.ColorPickerDialog.SIZE_LARGE) {
             mSwatchLength = res.getDimensionPixelSize(R.dimen.color_swatch_large);
             mMarginSize = res.getDimensionPixelSize(R.dimen.color_swatch_margins_large);
         } else {

@@ -1,17 +1,16 @@
 /*
- * Copyright 2014, Appyvet, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License.
  * You may obtain a copy of the License in the LICENSE file, or at:
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" 
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language 
- * governing permissions and limitations under the License. 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
+ * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 
-package com.appyvet.materialrangebar;
+package com.bblackbelt.materialrangebar;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -21,10 +20,10 @@ import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.View;
-
 
 
 /**
@@ -97,6 +96,11 @@ class PinView extends View {
 
     private boolean mHasBeenPressed = false;
 
+    private boolean mDrawPinTextDrawable = true;
+
+    @DrawableRes
+    private int mPinTextDrawableResId;
+
     // Constructors ////////////////////////////////////////////////////////////
 
     public PinView(Context context) {
@@ -105,7 +109,7 @@ class PinView extends View {
 
     // Initialization //////////////////////////////////////////////////////////
 
-    public void setFormatter(com.appyvet.materialrangebar.IRangeBarFormatter mFormatter) {
+    public void setFormatter(com.bblackbelt.materialrangebar.IRangeBarFormatter mFormatter) {
         this.formatter = mFormatter;
     }
 
@@ -127,10 +131,16 @@ class PinView extends View {
      * @param pinsAreTemporary    whether to show the pin initially or just the circle
      */
     public void init(Context ctx, float y, float pinRadiusDP, int pinColor, int textColor,
-                     float circleRadius, int circleColor, int circleBoundaryColor, float circleBoundarySize, float minFont, float maxFont, boolean pinsAreTemporary) {
+            float circleRadius, int circleColor,
+            int circleBoundaryColor,
+            float circleBoundarySize,
+            float minFont,
+            float maxFont,
+            boolean pinsAreTemporary,
+            boolean drawPinResDrawable,
+            int pinResDrawable) {
 
         mRes = ctx.getResources();
-        mPin = ContextCompat.getDrawable(ctx, R.drawable.rotate);
 
         mDensity = getResources().getDisplayMetrics().density;
         mMinPinFont = minFont / mDensity;
@@ -182,6 +192,12 @@ class PinView extends View {
         mTargetRadiusPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, targetRadius,
                 mRes.getDisplayMetrics());
         mY = y;
+
+        mDrawPinTextDrawable = drawPinResDrawable;
+        mPinTextDrawableResId = pinResDrawable;
+
+        int pinResId = pinResDrawable > 0 ? pinResDrawable : R.drawable.rotate;
+        mPin = ContextCompat.getDrawable(ctx, pinResId);
     }
 
     /**
@@ -213,6 +229,10 @@ class PinView extends View {
      */
     public void setXValue(String x) {
         mValue = x;
+    }
+
+    public String getXValue() {
+        return mValue;
     }
 
     /**
@@ -267,12 +287,17 @@ class PinView extends View {
                 && Math.abs(y - mY + mPinPadding) <= mTargetRadiusPx);
     }
 
+    public float getPinWidth() {
+        return (2 * mPinRadiusPx) + (mPinPadding / 2);
+    }
+
     //Draw the circle regardless of pressed state. If pin size is >0 then also draw the pin and text
     @Override
     public void draw(Canvas canvas) {
         //Draw the circle boundary only if mCircleBoundaryPaint was initialized
-        if (mCircleBoundaryPaint != null)
+        if (mCircleBoundaryPaint != null) {
             canvas.drawCircle(mX, mY, mCircleRadiusPx, mCircleBoundaryPaint);
+        }
 
         canvas.drawCircle(mX, mY, mCircleRadiusPx, mCirclePaint);
         //Draw pin if pressed
@@ -280,7 +305,9 @@ class PinView extends View {
             mBounds.set((int) mX - mPinRadiusPx,
                     (int) mY - (mPinRadiusPx * 2) - (int) mPinPadding,
                     (int) mX + mPinRadiusPx, (int) mY - (int) mPinPadding);
-            mPin.setBounds(mBounds);
+            if (mPin != null) {
+                mPin.setBounds(mBounds);
+            }
             String text = mValue;
 
             if (this.formatter != null) {
@@ -290,8 +317,11 @@ class PinView extends View {
             calibrateTextSize(mTextPaint, text, mBounds.width());
             mTextPaint.getTextBounds(text, 0, text.length(), mBounds);
             mTextPaint.setTextAlign(Paint.Align.CENTER);
-            mPin.setColorFilter(mPinFilter);
-            mPin.draw(canvas);
+
+            if (mDrawPinTextDrawable && mPin != null) {
+                mPin.setColorFilter(mPinFilter);
+                mPin.draw(canvas);
+            }
             canvas.drawText(text,
                     mX, mY - mPinRadiusPx - mPinPadding + mTextYPadding,
                     mTextPaint);

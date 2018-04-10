@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.appyvet.rangebarsample.colorpicker;
+package com.bblackbelt.rangebarsample.colorpicker;
+
+import com.bblackbelt.rangebarsample.R;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -23,8 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
-import com.appyvet.rangebarsample.R;
 
 /**
  * Creates a circular swatch of a specified color.  Adds a checkmark if marked as checked.

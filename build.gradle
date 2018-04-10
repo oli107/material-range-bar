@@ -1,36 +1,74 @@
 buildscript {
+    ext.maven = [
+            'siteUrl'            : 'https://github.com/bblackbelt/material-range-bar',
+            'gitUrl'             : 'https://github.com/bblackbelt/material-range-bar.git',
+            'repo'               : 'android',
+            'artifactGroup'      : 'com.bblackbelt',
+            'licenses'           : ["Apache-2.0"],
+            'artifactVersion'    : '1.0.0',
+            'artifactDesc'       : 'Fork of https://github.com/oli107/material-range-bar, with few additions.',
+            'artifactVersionCode': 1
+    ]
+    ext.versions = [
+            'minSdk'        : 14,
+            'compileSdk'    : 27,
+            'buildTools'    : '27.0.3',
+
+            'supportLibrary': '27.1.1',
+            'androidPlugin' : '3.1.0',
+            'androidTools'  : '27.0.3',
+            'kotlin'        : '1.2.30'
+    ]
+    ext.deps = [
+            android       : [
+                    'runtime'     : 'com.google.android:android:4.1.1.4',
+                    'gradlePlugin': "com.android.tools.build:gradle:${versions.androidPlugin}",
+            ],
+            'support'     : [
+                    'compat'      : "com.android.support:support-compat:${versions.supportLibrary}",
+                    'appcompat'   : "com.android.support:appcompat-v7:${versions.supportLibrary}",
+                    'annotations' : "com.android.support:support-annotations:${versions.supportLibrary}",
+                    'recyclerview': "com.android.support:recyclerview-v7:${versions.supportLibrary}",
+                    'test'        : [
+                            'runner': 'com.android.support.test:runner:0.5',
+                    ],
+            ],
+            'lint'        : [
+                    'core'  : "com.android.tools.lint:lint:${versions.androidTools}",
+                    'api'   : "com.android.tools.lint:lint-api:${versions.androidTools}",
+                    'checks': "com.android.tools.lint:lint-checks:${versions.androidTools}",
+                    'tests' : "com.android.tools.lint:lint-tests:${versions.androidTools}",
+            ],
+            'kotlin'      : [
+                    'stdLibJre8': "org.jetbrains.kotlin:kotlin-stdlib-jre8:${versions.kotlin}",
+                    'reflect'   : "org.jetbrains.kotlin:kotlin-reflect:${versions.kotlin}",
+                    'testjunit' : "org.jetbrains.kotlin:kotlin-test-junit:${versions.kotlin}"
+            ]
+    ]
+}
+
+subprojects { project ->
     repositories {
-        jcenter()
+        mavenCentral()
         google()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:3.1.1"
-    }
-}
-plugins {
-    id "com.jfrog.bintray" version "1.7.3"
-    id "com.github.dcendents.android-maven" version "1.5"
-}
-allprojects {
-    repositories {
-        jcenter()
         maven {
-            url "https://maven.google.com"
+            url "https://plugins.gradle.org/m2/"
         }
     }
-}
 
-afterEvaluate { project ->
-    def propsFile = rootProject.file('../keystore.properties')
-    def configName = 'release'
-
-    if (propsFile.exists() && android.signingConfigs.hasProperty(configName)) {
-        def props = new Properties()
-        props.load(new FileInputStream(propsFile))
-        android.signingConfigs[configName].storeFile = file(props['storeFile'])
-        android.signingConfigs[configName].storePassword = props['storePassword']
-        android.signingConfigs[configName].keyAlias = props['keyAlias']
-        android.signingConfigs[configName].keyPassword = props['keyPassword']
+    buildscript {
+        repositories {
+            mavenCentral()
+            google()
+            jcenter()
+            maven() { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+            maven() { url "https://plugins.gradle.org/m2/" }
+        }
+        dependencies {
+            classpath deps.android.gradlePlugin
+            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+            classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0"
+            classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
+        }
     }
 }

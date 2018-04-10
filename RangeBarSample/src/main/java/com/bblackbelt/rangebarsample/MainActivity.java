@@ -1,5 +1,5 @@
 
-package com.appyvet.rangebarsample;
+package com.bblackbelt.rangebarsample;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.appyvet.materialrangebar.RangeBar;
-import com.appyvet.rangebarsample.colorpicker.ColorPickerDialog;
-import com.appyvet.rangebarsample.colorpicker.Utils;
+import com.bblackbelt.materialrangebar.RangeBar;
+import com.bblackbelt.rangebarsample.colorpicker.ColorPickerDialog;
+import com.bblackbelt.rangebarsample.colorpicker.Utils;
 
 
 public class MainActivity extends Activity implements

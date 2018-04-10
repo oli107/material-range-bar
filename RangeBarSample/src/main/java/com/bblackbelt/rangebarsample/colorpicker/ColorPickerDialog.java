@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-package com.appyvet.rangebarsample.colorpicker;
+package com.bblackbelt.rangebarsample.colorpicker;
+
+import com.bblackbelt.rangebarsample.Component;
+import com.bblackbelt.rangebarsample.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,9 +27,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
-
-import com.appyvet.rangebarsample.Component;
-import com.appyvet.rangebarsample.R;
 
 
 /**
