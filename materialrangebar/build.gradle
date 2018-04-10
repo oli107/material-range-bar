@@ -1,94 +1,131 @@
+def artifactName = "m-materialrangebar"
+
+ext.bintrayuser = System.getenv("BINTRAY_USER")
+ext.bintraypwd = System.getenv("BINTRAY_PWD")
+
 apply plugin: 'com.android.library'
-/**
- In order to push the library to Bintray we need to execute the
- following gradle commands in the given sequence.
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+apply plugin: 'com.github.ben-manes.versions'
 
- ./gradlew assemble      // To generate build folder
- ./gradlew createPom     // To create POM file for maven. if that creates a new file then dont add it to git
- ./gradlew bintrayUpload // To upload library to bintray
- */
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'MaterialRangebar'
-
-    publishedGroupId = 'com.bblackbelt'
-    libraryName = 'Material Rangebar'
-    artifact = 'materialrangebar'
-
-    libraryDescription = 'MaterialRangeBar is a fork from https://github.com/edmodo/range-bar that adds some basic material styling, as well as start and end values, as floats and some other things. It is similar to an enhanced SeekBar widget, though it doesn\'t make use of the SeekBar. It provides for the selection of a range of values as well as for a single value. The selectable range values are discrete values designated by tick marks; the pin (handle) will snap to the nearest tick mark.'
-
-    siteUrl = 'https://github.com/oli107/material-range-bar'
-    gitUrl = 'https://github.com/oli107/material-range-bar.git'
-
-    libraryVersion = '1.4.1'
-
-    developerId = 'krazykira'
-    developerName = 'Sheraz Ahmed Khilji'
-    developerEmail = 'sherazkhilji@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
-/**
- * This is needed because we want to complie this as android library so that we can test it before publishing
- */
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 27
-        versionCode 1
-        versionName libraryVersion
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+        versionCode maven.artifactVersionCode
+        versionName artifactName
+    }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    android {
+        lintOptions {
+            abortOnError false
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/java'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-compat:27.1.1'
+    implementation deps.support.compat
 }
 
-/**
- Run this code to create pom-default.xml file in build directory
- */
-task createPom {
-    doLast {
-        pom {
-            project {
-//          All of these values are defined in the ext block
-                packaging 'aar'
-                groupId publishedGroupId
-                artifactId artifact
-                version libraryVersion
+// build a jar with source files
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
 
-                inceptionYear new Date()
-                licenses {
-                    license {
-                        name licenseName
-                        url licenseUrl
-                        distribution 'repo'
-                    }
-                }
-                developers {
-                    developer {
-                        id developerId
-                        name developerName
-                        email developerEmail
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
+task javadoc(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    android.libraryVariants.all { variant ->
+        if (variant.name == 'release') {
+            owner.classpath += variant.javaCompile.classpath
+        }
+    }
+    exclude '**/R.html', '**/R.*.html', '**/index.html'
+}
 
-                }
-            }
+// build a jar with javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
 
-        }.writeTo("build/poms/pom-default.xml").writeTo("pom.xml")
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        def deployPath = file(getProperty('aar.deployPath'))
+        repository(url: "file://${deployPath.absolutePath}")
+        pom.project {
+            groupId maven.artifactGroup
+            version maven.artifactVersion
+            artifactId artifactName
+        }
     }
 }
-// Place it at the end of the file
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+
+bintray {
+    user = bintrayuser
+    key = bintraypwd
+    dryRun = false
+
+    publications = ['Publication']
+    pkg {
+        repo = maven.repo
+        userOrg = maven.userOrg
+        websiteUrl = maven.siteUrl
+        vcsUrl = maven.gitUrl
+        licenses = maven.licenses
+        name = artifactName
+        publish = true
+
+        version {
+            name = maven.artifactVersion
+            desc = maven.artifactDesc
+            vcsTag = maven.artifactVersion
+            released = new Date()
+        }
+    }
+}
+
+publishing {
+    publications {
+        Publication(MavenPublication) {
+            artifact("$buildDir/outputs/aar/m-materialrangebar-release.aar")
+            artifact sourcesJar
+            artifact javadocJar
+            groupId maven.artifactGroup
+            version maven.artifactVersion
+            artifactId artifactName
+        }
+    }
+}
