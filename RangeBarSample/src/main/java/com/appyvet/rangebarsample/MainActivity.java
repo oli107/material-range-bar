@@ -84,6 +84,7 @@ public class MainActivity extends Activity implements
         final TextView tickTopLabelsButton = (TextView) findViewById(R.id.toggleTickTopLabels);
         final TextView tickLabelColor = (TextView) findViewById(R.id.tickLabelColor);
         final TextView tickLabelSelectedColor = (TextView) findViewById(R.id.tickLabelSelectColor);
+        final TextView togglePinsEnabled = (TextView) findViewById(R.id.togglePinsEnabled);
 
         //Sets the buttons to bold.
 //        barColor.setTypeface(font, Typeface.BOLD);
@@ -416,9 +417,15 @@ public class MainActivity extends Activity implements
             }
         });
 
+        togglePinsEnabled.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rangebar.setPinsEnabled(!rangebar.arePinsEnabled());
+            }
+        });
     }
-    private int getValueInDP(int value)
-    {
+
+    private int getValueInDP(int value) {
         int valueInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 value,
                 getResources().getDisplayMetrics());

@@ -38,6 +38,7 @@
     <string name="check_box_rounded_background">Rounded background</string>
     <string name="top_tick_labels">Top tick labels</string>
     <string name="bottom_tick_labels">Bottom tick labels</string>
+    <string name="pins_enabled">Pins enabled</string>
     <string-array translatable="false" name="default_color_choice_values">
         <item>#33b5e5</item>
         <item>#aa66cc</item>

@@ -95,6 +95,8 @@ class PinView extends View {
 
     private int pinColor;
 
+    private boolean mPinEnabled = false;
+
     // Constructors ////////////////////////////////////////////////////////////
 
     public PinView(Context context) {
@@ -125,7 +127,8 @@ class PinView extends View {
      * @param pinsAreTemporary    whether to show the pin initially or just the circle
      */
     public void init(Context ctx, float y, float pinRadiusDP, int pinColor, int textColor,
-                     float circleRadius, int circleColor, int circleBoundaryColor, float circleBoundarySize, float minFont, float maxFont, boolean pinsAreTemporary) {
+                     float circleRadius, int circleColor, int circleBoundaryColor, float circleBoundarySize,
+                     float minFont, float maxFont, boolean pinsAreTemporary, boolean pinEnabled) {
 
         mRes = ctx.getResources();
         mPin = ContextCompat.getDrawable(ctx, R.drawable.rotate);
@@ -172,6 +175,7 @@ class PinView extends View {
         }
 
         this.pinColor = pinColor;
+        mPinEnabled = pinEnabled;
 
         // Sets the minimum touchable area, but allows it to expand based on
         // image size
@@ -274,25 +278,27 @@ class PinView extends View {
 
         canvas.drawCircle(mX, mY, mCircleRadiusPx, mCirclePaint);
         //Draw pin if pressed
-        if (mPinRadiusPx > 0 && (mHasBeenPressed || !mPinsAreTemporary)) {
-            mBounds.set((int) mX - mPinRadiusPx,
-                    (int) mY - (mPinRadiusPx * 2) - (int) mPinPadding,
-                    (int) mX + mPinRadiusPx, (int) mY - (int) mPinPadding);
-            mPin.setBounds(mBounds);
-            String text = mValue;
+        if (mPinEnabled) {
+            if (mPinRadiusPx > 0 && (mHasBeenPressed || !mPinsAreTemporary)) {
+                mBounds.set((int) mX - mPinRadiusPx,
+                        (int) mY - (mPinRadiusPx * 2) - (int) mPinPadding,
+                        (int) mX + mPinRadiusPx, (int) mY - (int) mPinPadding);
+                mPin.setBounds(mBounds);
+                String text = mValue;
 
-            if (this.formatter != null) {
-                text = formatter.format(text);
+                if (this.formatter != null) {
+                    text = formatter.format(text);
+                }
+
+                calibrateTextSize(mTextPaint, text, mBounds.width());
+                mTextPaint.getTextBounds(text, 0, text.length(), mBounds);
+                mTextPaint.setTextAlign(Paint.Align.CENTER);
+                DrawableCompat.setTint(mPin, pinColor);
+                mPin.draw(canvas);
+                canvas.drawText(text,
+                        mX, mY - mPinRadiusPx - mPinPadding + mTextYPadding,
+                        mTextPaint);
             }
-
-            calibrateTextSize(mTextPaint, text, mBounds.width());
-            mTextPaint.getTextBounds(text, 0, text.length(), mBounds);
-            mTextPaint.setTextAlign(Paint.Align.CENTER);
-            DrawableCompat.setTint(mPin, pinColor);
-            mPin.draw(canvas);
-            canvas.drawText(text,
-                    mX, mY - mPinRadiusPx - mPinPadding + mTextYPadding,
-                    mTextPaint);
         }
         super.draw(canvas);
     }
