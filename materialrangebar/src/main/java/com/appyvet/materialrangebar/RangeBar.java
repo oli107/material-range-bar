@@ -227,6 +227,8 @@ public class RangeBar extends View {
 
     private boolean mOnlyOnDrag = false;
 
+    private boolean mPinsEnabled = true;
+
     private PinTextFormatter mPinTextFormatter = new PinTextFormatter() {
         @Override
         public String getText(String value) {
@@ -405,12 +407,12 @@ public class RangeBar extends View {
             mLeftThumb = new PinView(ctx);
             mLeftThumb.setFormatter(mFormatter);
             mLeftThumb.init(ctx, yPos, expandedPinRadius, mPinColor, mTextColor, mCircleSize,
-                    mCircleColor, mCircleBoundaryColor, mCircleBoundarySize, mMinPinFont, mMaxPinFont, mArePinsTemporary);
+                    mCircleColor, mCircleBoundaryColor, mCircleBoundarySize, mMinPinFont, mMaxPinFont, mArePinsTemporary, mPinsEnabled);
         }
         mRightThumb = new PinView(ctx);
         mRightThumb.setFormatter(mFormatter);
         mRightThumb.init(ctx, yPos, expandedPinRadius, mPinColor, mTextColor, mCircleSize,
-                mCircleColor, mCircleBoundaryColor, mCircleBoundarySize, mMinPinFont, mMaxPinFont, mArePinsTemporary);
+                mCircleColor, mCircleBoundaryColor, mCircleBoundarySize, mMinPinFont, mMaxPinFont, mArePinsTemporary, mPinsEnabled);
 
         // Create the underlying bar.
         final float marginLeft = Math.max(mExpandedPinRadius, mCircleSize);
@@ -1160,6 +1162,20 @@ public class RangeBar extends View {
         this.mPinTextFormatter = pinTextFormatter;
     }
 
+    /**
+     * Sets the visibility of pins by the supplied value
+     *
+     * @param enable boolean specifying whether pins are visible
+     */
+    public void setPinsEnabled(boolean enable) {
+        mPinsEnabled = enable;
+        createPins();
+    }
+
+    public boolean arePinsEnabled() {
+        return mPinsEnabled;
+    }
+
     // Private Methods /////////////////////////////////////////////////////////
 
     /**
@@ -1301,6 +1317,7 @@ public class RangeBar extends View {
             mIsRangeBar = ta.getBoolean(R.styleable.RangeBar_mrb_rangeBar, true);
 
             mOnlyOnDrag = ta.getBoolean(R.styleable.RangeBar_mrb_onlyOnDrag, false);
+            mPinsEnabled = ta.getBoolean(R.styleable.RangeBar_mrb_pinsEnabled, true);
         } finally {
             ta.recycle();
         }
@@ -1355,12 +1372,12 @@ public class RangeBar extends View {
         if (mIsRangeBar) {
             mLeftThumb = new PinView(ctx);
             mLeftThumb.init(ctx, yPos, expandedPinRadius, mPinColor, mTextColor, mCircleSize, mCircleColor, mCircleBoundaryColor, mCircleBoundarySize,
-                    mMinPinFont, mMaxPinFont, mArePinsTemporary);
+                    mMinPinFont, mMaxPinFont, mArePinsTemporary, mPinsEnabled);
         }
         mRightThumb = new PinView(ctx);
         mRightThumb
                 .init(ctx, yPos, expandedPinRadius, mPinColor, mTextColor, mCircleSize, mCircleColor, mCircleBoundaryColor, mCircleBoundarySize
-                        , mMinPinFont, mMaxPinFont, mArePinsTemporary);
+                        , mMinPinFont, mMaxPinFont, mArePinsTemporary, mPinsEnabled);
 
         float marginLeft = getMarginLeft();
         float barLength = getBarLength();
