@@ -39,7 +39,7 @@ android {
 
 def propFile = file('../keystore.properties')
 if (propFile.canRead()) {
-    def Properties p = new Properties()
+    Properties p = new Properties()
     p.load(new FileInputStream(propFile))
 
     if (p != null

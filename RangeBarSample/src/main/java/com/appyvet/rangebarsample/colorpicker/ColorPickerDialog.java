@@ -35,57 +35,32 @@ import com.appyvet.rangebarsample.R;
  */
 public class ColorPickerDialog extends DialogFragment implements ColorPickerSwatch.OnSwatchColorSelectedListener {
 
-    /**
-     * Interface for a callback when a color square is selected.
-     */
-    public interface OnColorSelectedListener {
-
-        /**
-         * Called when a specific color square has been selected.
-         */
-        public void onColorSelected(int color, Component component);
-    }
-
     public static final int SIZE_LARGE = 1;
-
     public static final int SIZE_SMALL = 2;
-
-    protected AlertDialog mAlertDialog;
-
     protected static final String KEY_TITLE_ID = "title_id";
-
     protected static final String KEY_COLORS = "colors";
-
     protected static final String KEY_SELECTED_COLOR = "selected_color";
-
     protected static final String KEY_COLUMNS = "columns";
-
     protected static final String KEY_SIZE = "size";
-
+    protected AlertDialog mAlertDialog;
     protected int mTitleResId = R.string.color_picker_default_title;
-
     protected int[] mColors = null;
-
     protected int mSelectedColor;
-
     protected int mColumns;
-
     protected int mSize;
-
+    protected OnColorSelectedListener mListener;
     private Component mComponent;
 
     private ColorPickerPalette mPalette;
 
     private ProgressBar mProgress;
 
-    protected OnColorSelectedListener mListener;
-
     public ColorPickerDialog() {
         // Empty constructor required for dialog fragments.
     }
 
     public static ColorPickerDialog newInstance(int titleResId, int[] colors, int selectedColor,
-            int columns, int size, Component component) {
+                                                int columns, int size, Component component) {
         ColorPickerDialog ret = new ColorPickerDialog();
         ret.initialize(titleResId, colors, selectedColor, columns, size, component);
         return ret;
@@ -130,8 +105,8 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerSwat
         final Activity activity = getActivity();
 
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.color_picker_dialog, null);
-        mProgress = (ProgressBar) view.findViewById(android.R.id.progress);
-        mPalette = (ColorPickerPalette) view.findViewById(R.id.color_picker);
+        mProgress = view.findViewById(android.R.id.progress);
+        mPalette = view.findViewById(R.id.color_picker);
         mPalette.init(mSize, mColumns, this);
 
         if (mColors != null) {
@@ -190,20 +165,6 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerSwat
         }
     }
 
-    public void setColors(int[] colors) {
-        if (mColors != colors) {
-            mColors = colors;
-            refreshPalette();
-        }
-    }
-
-    public void setSelectedColor(int color) {
-        if (mSelectedColor != color) {
-            mSelectedColor = color;
-            refreshPalette();
-        }
-    }
-
     private void refreshPalette() {
         if (mPalette != null && mColors != null) {
             mPalette.drawPalette(mColors, mSelectedColor);
@@ -214,8 +175,22 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerSwat
         return mColors;
     }
 
+    public void setColors(int[] colors) {
+        if (mColors != colors) {
+            mColors = colors;
+            refreshPalette();
+        }
+    }
+
     public int getSelectedColor() {
         return mSelectedColor;
+    }
+
+    public void setSelectedColor(int color) {
+        if (mSelectedColor != color) {
+            mSelectedColor = color;
+            refreshPalette();
+        }
     }
 
     @Override
@@ -223,5 +198,16 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerSwat
         super.onSaveInstanceState(outState);
         outState.putIntArray(KEY_COLORS, mColors);
         outState.putSerializable(KEY_SELECTED_COLOR, mSelectedColor);
+    }
+
+    /**
+     * Interface for a callback when a color square is selected.
+     */
+    public interface OnColorSelectedListener {
+
+        /**
+         * Called when a specific color square has been selected.
+         */
+        void onColorSelected(int color, Component component);
     }
 }

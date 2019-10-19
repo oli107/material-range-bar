@@ -1,4 +1,3 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.appyvet.materialrangebar">
+<manifest package="com.appyvet.materialrangebar">
 
 </manifest>

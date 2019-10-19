@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">RangeBar Sample</string>
-    <string name="action_settings">Settings</string>
-    <string name="title">MaterialRangeBar</string>
-    <string name="title_recyclerview">Rangebar RecyclerView Sample</string>
-    <string name="tickStart">Tick Start = 1</string>
-    <string name="tickEnd">Tick End = 10</string>
-    <string name="tickInterval">Tick Interval = 1</string>
-    <string name="tickHeight">Tick Height = 24</string>
-    <string name="barWeight">Bar Weight = 2dp</string>
-    <string name="barColor">Bar Color = #CCCCCC</string>
-    <string name="tickLabelColor">Tick Label Color</string>
-    <string name="tickLabelSelectedColor">Tick Label Selected Color</string>
-    <string name="connectingLineWeight">Connecting Line Weight = 4dp</string>
-    <string name="connectingLineColor">Connecting Line Color = #3F51B5</string>
-    <string name="thumbRadius">Pin Size = 14dp</string>
-    <string name="selectorBoundarySize">Selector Boundary Size = 1dp</string>
-    <string name="selectorBoundaryColor">Selector Boundary Color = #3F51B5</string>
-    <string name="thumbColorNormal">Pin Color = #3F51B5</string>
-    <string name="selectorColorNormal">Selector Color = #3F51B5</string>
-    <string name="tickColorNormal">Tick Color = #000000</string>
-    <string name="textColorNormal">Text Color = #ffffff</string>
-    <string name="confirmNewColor">New</string>
-    <string name="confirmDefaultColor">Default</string>
-    <string name="colorPickerTitle">Select a Color</string>
-    <string name="resetThumbColors">Reset Thumb Colors</string>
-    <string name="leftValue_label">Left Value 1</string>
-    <string name="leftIndex_label">Left Index 0</string>
-    <string name="rightValue_label">Right Value 10</string>
-    <string name="rightIndex_label">Right Index 9</string>
-    <string name="toggle_range">Range/Seek</string>
-    <string name="color_picker_default_title">Select a Color</string>
-    <string name="color_swatch_description">Color</string>
-    <string name="color_swatch_description_selected">Color selected</string>
-    <string name="check_box_rounded_background">Rounded background</string>
-    <string name="top_tick_labels">Top tick labels</string>
-    <string name="bottom_tick_labels">Bottom tick labels</string>
-    <string name="recyclerview_text">Rangebar Recyclerview Implementation</string>
-    <string-array translatable="false" name="default_color_choice_values">
-        <item>#33b5e5</item>
-        <item>#aa66cc</item>
-        <item>#99cc00</item>
-        <item>#ffbb33</item>
-        <item>#ff4444</item>
-        <item>#0099cc</item>
-        <item>#9933cc</item>
-        <item>#669900</item>
-        <item>#ff8800</item>
-        <item>#cc0000</item>
-        <item>#ffffff</item>
-        <item>#000000</item>
-        <item>#cccccc</item>
-        <item>#888888</item>
-        <item>#3f51b5</item>
-    </string-array>
+	<string name="app_name">RangeBar Sample</string>
+	<string name="action_settings">Settings</string>
+	<string name="title">MaterialRangeBar</string>
+	<string name="title_recyclerview">Rangebar RecyclerView Sample</string>
+	<string name="tickStart">Tick Start = 1</string>
+	<string name="tickEnd">Tick End = 10</string>
+	<string name="tickInterval">Tick Interval = 1</string>
+	<string name="tickHeight">Tick Height = 24</string>
+	<string name="barWeight">Bar Weight = 2dp</string>
+	<string name="barColor">Bar Color = #CCCCCC</string>
+	<string name="tickLabelColor">Tick Label Color</string>
+	<string name="tickLabelSelectedColor">Tick Label Selected Color</string>
+	<string name="connectingLineWeight">Connecting Line Weight = 4dp</string>
+	<string name="connectingLineColor">Connecting Line Color = #3F51B5</string>
+	<string name="thumbRadius">Pin Size = 14dp</string>
+	<string name="selectorBoundarySize">Selector Boundary Size = 1dp</string>
+	<string name="selectorBoundaryColor">Selector Boundary Color = #3F51B5</string>
+	<string name="thumbColorNormal">Pin Color = #3F51B5</string>
+	<string name="selectorColorNormal">Selector Color = #3F51B5</string>
+	<string name="tickColorNormal">Tick Color = #000000</string>
+	<string name="textColorNormal">Text Color = #ffffff</string>
+	<string name="confirmNewColor">New</string>
+	<string name="confirmDefaultColor">Default</string>
+	<string name="colorPickerTitle">Select a Color</string>
+	<string name="resetThumbColors">Reset Thumb Colors</string>
+	<string name="leftValue_label">Left Value 1</string>
+	<string name="leftIndex_label">Left Index 0</string>
+	<string name="rightValue_label">Right Value 10</string>
+	<string name="rightIndex_label">Right Index 9</string>
+	<string name="toggle_range">Range/Seek</string>
+	<string name="color_picker_default_title">Select a Color</string>
+	<string name="color_swatch_description">Color</string>
+	<string name="color_swatch_description_selected">Color selected</string>
+	<string name="check_box_rounded_background">Rounded background</string>
+	<string name="top_tick_labels">Top tick labels</string>
+	<string name="bottom_tick_labels">Bottom tick labels</string>
+	<string name="recyclerview_text">Rangebar Recyclerview Implementation</string>
+	<string-array name="default_color_choice_values" translatable="false">
+		<item>#33b5e5</item>
+		<item>#aa66cc</item>
+		<item>#99cc00</item>
+		<item>#ffbb33</item>
+		<item>#ff4444</item>
+		<item>#0099cc</item>
+		<item>#9933cc</item>
+		<item>#669900</item>
+		<item>#ff8800</item>
+		<item>#cc0000</item>
+		<item>#ffffff</item>
+		<item>#000000</item>
+		<item>#cccccc</item>
+		<item>#888888</item>
+		<item>#3f51b5</item>
+	</string-array>
 </resources>

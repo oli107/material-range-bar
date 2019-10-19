@@ -52,6 +52,18 @@ public class ColorPickerPalette extends TableLayout {
     }
 
     /**
+     * Appends a swatch to the end of the row for even-numbered rows (starting with row 0),
+     * to the beginning of a row for odd-numbered rows.
+     */
+    private static void addSwatchToRow(TableRow row, View swatch, int rowNumber) {
+        if (rowNumber % 2 == 0) {
+            row.addView(swatch);
+        } else {
+            row.addView(swatch, 0);
+        }
+    }
+
+    /**
      * Initialize the size, columns, and listener.  Size should be a pre-defined size (SIZE_LARGE
      * or SIZE_SMALL) from ColorPickerDialogFragment.
      */
@@ -122,25 +134,13 @@ public class ColorPickerPalette extends TableLayout {
     }
 
     /**
-     * Appends a swatch to the end of the row for even-numbered rows (starting with row 0),
-     * to the beginning of a row for odd-numbered rows.
-     */
-    private static void addSwatchToRow(TableRow row, View swatch, int rowNumber) {
-        if (rowNumber % 2 == 0) {
-            row.addView(swatch);
-        } else {
-            row.addView(swatch, 0);
-        }
-    }
-
-    /**
      * Add a content description to the specified swatch view. Because the colors get added in a
      * snaking form, every other row will need to compensate for the fact that the colors are added
      * in an opposite direction from their left->right/top->bottom order, which is how the system
      * will arrange them for accessibility purposes.
      */
     private void setSwatchDescription(int rowNumber, int index, int rowElements, boolean selected,
-            View swatch) {
+                                      View swatch) {
         int accessibilityIndex;
         if (rowNumber % 2 == 0) {
             // We're in a regular-ordered row
@@ -174,8 +174,8 @@ public class ColorPickerPalette extends TableLayout {
     /**
      * Creates a color swatch.
      */
-    private  ColorPickerSwatch createColorSwatch(int color, int selectedColor) {
-         ColorPickerSwatch view = new  ColorPickerSwatch(getContext(), color,
+    private ColorPickerSwatch createColorSwatch(int color, int selectedColor) {
+        ColorPickerSwatch view = new ColorPickerSwatch(getContext(), color,
                 color == selectedColor, mOnSwatchColorSelectedListener);
         TableRow.LayoutParams params = new TableRow.LayoutParams(mSwatchLength, mSwatchLength);
         params.setMargins(mMarginSize, mMarginSize, mMarginSize, mMarginSize);

@@ -1,443 +1,444 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mylayout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    tools:context="com.appyvet.rangebarsample.MainActivity">
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:background="@color/indigo500"
-        android:gravity="center"
-        android:text="@string/title"
-        android:textColor="@color/white"
-        android:textSize="40sp" />
-
-    <com.appyvet.materialrangebar.RangeBar xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/rangebar1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        app:mrb_barWeight="2dp"
-        app:mrb_connectingLineColors="@array/connecting_colors"
-        app:mrb_connectingLineWeight="4dp"
-        app:mrb_leftSelectorColor="#FFB300"
-        app:mrb_pinColor="#6c3f6a"
-        app:mrb_pinMaxFont="15sp"
-        app:mrb_pinMinFont="12sp"
-        app:mrb_pinRadius="14dp"
-        app:mrb_pinTextColor="@color/white"
-        app:mrb_rangeBar="true"
-        app:mrb_rangeBarPaddingBottom="30dp"
-        app:mrb_rangeBar_rounded="true"
-        app:mrb_rightSelectorColor="#1E88E5"
-        app:mrb_selectorBoundaryColor="@color/accent"
-        app:mrb_selectorBoundarySize="2dp"
-        app:mrb_selectorSize="10dp"
-        app:mrb_temporaryPins="true"
-        app:mrb_tickBottomLabels="@array/ticks_labels"
-        app:mrb_tickColors="@array/tick_colors"
-        app:mrb_tickDefaultColor="@color/indigo500"
-        app:mrb_tickDefaultLabel="label"
-        app:mrb_tickEnd="10"
-        app:mrb_tickHeight="4dp"
-        app:mrb_tickInterval="1"
-        app:mrb_tickLabelColor="@color/indigo500"
-        app:mrb_tickLabelSelectedColor="@color/accent"
-        app:mrb_tickLabelSize="4sp"
-        app:mrb_tickStart="1"
-        app:mrb_tickTopLabels="@array/ticks_labels" />
-
-    <include
-        layout="@layout/divider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@android:color/white">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvLeftIndex"
-                        style="@style/RoboTheme"
-                        android:layout_marginTop="0dp"
-                        android:text="@string/leftIndex_label" />
-
-                    <TextView
-                        android:id="@+id/tvLeftValue"
-                        style="@style/RoboTheme"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/leftValue_label" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvRightIndex"
-                        style="@style/RoboTheme"
-                        android:layout_marginTop="0dp"
-                        android:text="@string/rightIndex_label" />
-
-                    <TextView
-                        android:id="@+id/tvRightValue"
-                        style="@style/RoboTheme"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/rightValue_label" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    card_view:cardBackgroundColor="@color/white"
-                    card_view:cardCornerRadius="2dp"
-                    card_view:cardElevation="6dp">
-
-                    <TextView
-                        android:id="@+id/toggleTickTopLabels"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/top_tick_labels"
-                        android:textAllCaps="true"
-                        android:textColor="@color/accent"
-                        android:textSize="16sp" />
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    card_view:cardBackgroundColor="@color/white"
-                    card_view:cardCornerRadius="2dp"
-                    card_view:cardElevation="6dp">
-
-                    <TextView
-                        android:id="@+id/toggleTickBottomLabels"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/bottom_tick_labels"
-                        android:textAllCaps="true"
-                        android:textColor="@color/accent"
-                        android:textSize="16sp" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tickStart"
-                style="@style/RoboTheme"
-                android:text="@string/tickStart" />
-
-            <SeekBar
-                android:id="@+id/tickStartSeek"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="1" />
-
-            <TextView
-                android:id="@+id/tickEnd"
-                style="@style/RoboTheme"
-                android:text="@string/tickEnd" />
-
-            <SeekBar
-                android:id="@+id/tickEndSeek"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="10" />
-
-            <TextView
-                android:id="@+id/tickInterval"
-                style="@style/RoboTheme"
-                android:text="@string/tickInterval" />
-
-            <SeekBar
-                android:id="@+id/tickIntervalSeek"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="5"
-                android:min="1"
-                android:progress="1" />
-
-            <TextView
-                android:id="@+id/barWeight"
-                style="@style/RoboTheme"
-                android:text="@string/barWeight" />
-
-            <SeekBar
-                android:id="@+id/barWeightSeek"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="8"
-                android:min="0"
-                android:progress="2" />
-
-            <TextView
-                android:id="@+id/connectingLineWeight"
-                style="@style/RoboTheme"
-                android:text="@string/connectingLineWeight" />
-
-            <SeekBar
-                android:id="@+id/connectingLineWeightSeek"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="8"
-                android:min="0"
-                android:progress="4" />
-
-            <TextView
-                android:id="@+id/thumbRadius"
-                style="@style/RoboTheme"
-                android:text="@string/thumbRadius" />
-
-            <SeekBar
-                android:id="@+id/thumbRadiusSeek"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="30"
-                android:min="10"
-                android:progress="14" />
-
-            <TextView
-                android:id="@+id/thumbBoundarySize"
-                style="@style/RoboTheme"
-                android:text="@string/selectorBoundarySize" />
-
-            <SeekBar
-                android:id="@+id/thumbBoundarySeek"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="6"
-                android:progress="1" />
-
-            <CheckBox
-                android:id="@+id/cbRoundedBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/check_box_rounded_background" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.CardView style="@style/button_holder">
-
-                    <TextView
-                        android:id="@+id/tickColor"
-                        style="@style/button"
-                        android:text="@string/tickColorNormal" />
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView style="@style/button_holder">
-
-                    <TextView
-                        android:id="@+id/pinColor"
-                        style="@style/button"
-                        android:text="@string/thumbColorNormal" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.CardView style="@style/button_holder">
-
-                    <TextView
-                        android:id="@+id/selectorColor"
-                        style="@style/button"
-                        android:text="@string/selectorColorNormal" />
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView style="@style/button_holder">
-
-                    <TextView
-                        android:id="@+id/textColor"
-                        style="@style/button"
-                        android:text="@string/textColorNormal" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.CardView style="@style/button_holder">
-
-                    <TextView
-                        android:id="@+id/connectingLineColor"
-                        style="@style/button"
-                        android:text="@string/connectingLineColor" />
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView style="@style/button_holder">
-
-                    <TextView
-                        android:id="@+id/barColor"
-                        style="@style/button"
-                        android:text="@string/barColor" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    card_view:cardBackgroundColor="@color/white"
-                    card_view:cardCornerRadius="2dp"
-                    card_view:cardElevation="6dp">
-
-                    <TextView
-                        android:id="@+id/enableRange"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/toggle_range"
-                        android:textAllCaps="true"
-                        android:textColor="@color/accent"
-                        android:textSize="16sp" />
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    card_view:cardBackgroundColor="@color/white"
-                    card_view:cardCornerRadius="2dp"
-                    card_view:cardElevation="6dp">
-
-                    <TextView
-                        android:id="@+id/disable"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="disable"
-                        android:textAllCaps="true"
-                        android:textColor="@color/accent"
-                        android:textSize="16sp" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.CardView style="@style/button_holder">
-
-                    <TextView
-                        android:id="@+id/tickLabelColor"
-                        style="@style/button"
-                        android:text="@string/tickLabelColor" />
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView style="@style/button_holder">
-
-                    <TextView
-                        android:id="@+id/tickLabelSelectColor"
-                        style="@style/button"
-                        android:text="@string/tickLabelSelectedColor" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.CardView style="@style/button_holder">
-
-                    <TextView
-                        android:id="@+id/selectorBoundaryColor"
-                        style="@style/button"
-                        android:text="@string/selectorBoundaryColor" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.CardView style="@style/button_holder">
-
-                    <TextView
-                        android:id="@+id/selectorRecyclerView"
-                        style="@style/button"
-                        android:text="@string/recyclerview_text" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/mylayout"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:background="@color/white"
+	android:focusableInTouchMode="true"
+	android:orientation="vertical"
+	tools:context="com.appyvet.rangebarsample.MainActivity">
+
+	<TextView
+		android:id="@+id/title"
+		android:layout_width="match_parent"
+		android:layout_height="130dp"
+		android:background="@color/indigo500"
+		android:gravity="center"
+		android:text="@string/title"
+		android:textColor="@color/white"
+		android:textSize="40sp" />
+
+	<com.appyvet.materialrangebar.RangeBar
+		android:id="@+id/rangebar1"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="40dp"
+		android:layout_marginEnd="40dp"
+		app:mrb_barWeight="2dp"
+		app:mrb_connectingLineColors="@array/connecting_colors"
+		app:mrb_connectingLineWeight="4dp"
+		app:mrb_leftSelectorColor="#FFB300"
+		app:mrb_pinColor="#6c3f6a"
+		app:mrb_pinMaxFont="15sp"
+		app:mrb_pinMinFont="12sp"
+		app:mrb_pinRadius="14dp"
+		app:mrb_pinTextColor="@color/white"
+		app:mrb_rangeBar="true"
+		app:mrb_rangeBarPaddingBottom="30dp"
+		app:mrb_rangeBar_rounded="true"
+		app:mrb_rightSelectorColor="#1E88E5"
+		app:mrb_selectorBoundaryColor="@color/accent"
+		app:mrb_selectorBoundarySize="2dp"
+		app:mrb_selectorSize="10dp"
+		app:mrb_temporaryPins="true"
+		app:mrb_tickBottomLabels="@array/ticks_labels"
+		app:mrb_tickColors="@array/tick_colors"
+		app:mrb_tickDefaultColor="@color/indigo500"
+		app:mrb_tickDefaultLabel="label"
+		app:mrb_tickEnd="10"
+		app:mrb_tickHeight="4dp"
+		app:mrb_tickInterval="1"
+		app:mrb_tickLabelColor="@color/indigo500"
+		app:mrb_tickLabelSelectedColor="@color/accent"
+		app:mrb_tickLabelSize="4sp"
+		app:mrb_tickStart="1"
+		app:mrb_tickTopLabels="@array/ticks_labels" />
+
+	<include
+		layout="@layout/divider"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" />
+
+	<ScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:background="@android:color/white">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingLeft="16dp"
+			android:paddingRight="16dp">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/tvLeftIndex"
+						style="@style/RoboTheme"
+						android:layout_marginTop="0dp"
+						android:text="@string/leftIndex_label" />
+
+					<TextView
+						android:id="@+id/tvLeftValue"
+						style="@style/RoboTheme"
+						android:layout_marginTop="10dp"
+						android:text="@string/leftValue_label" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/tvRightIndex"
+						style="@style/RoboTheme"
+						android:layout_marginTop="0dp"
+						android:text="@string/rightIndex_label" />
+
+					<TextView
+						android:id="@+id/tvRightValue"
+						style="@style/RoboTheme"
+						android:layout_marginTop="10dp"
+						android:text="@string/rightValue_label" />
+
+				</LinearLayout>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<android.support.v7.widget.CardView
+					android:layout_width="0dp"
+					android:layout_height="48dp"
+					android:layout_margin="6dp"
+					android:layout_weight="1"
+					card_view:cardBackgroundColor="@color/white"
+					card_view:cardCornerRadius="2dp"
+					card_view:cardElevation="6dp">
+
+					<TextView
+						android:id="@+id/toggleTickTopLabels"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_gravity="center"
+						android:layout_marginLeft="8dp"
+						android:layout_marginRight="8dp"
+						android:gravity="center_vertical|center_horizontal"
+						android:text="@string/top_tick_labels"
+						android:textAllCaps="true"
+						android:textColor="@color/accent"
+						android:textSize="16sp" />
+				</android.support.v7.widget.CardView>
+
+				<android.support.v7.widget.CardView
+					android:layout_width="0dp"
+					android:layout_height="48dp"
+					android:layout_margin="6dp"
+					android:layout_weight="1"
+					card_view:cardBackgroundColor="@color/white"
+					card_view:cardCornerRadius="2dp"
+					card_view:cardElevation="6dp">
+
+					<TextView
+						android:id="@+id/toggleTickBottomLabels"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_gravity="center"
+						android:layout_marginLeft="8dp"
+						android:layout_marginRight="8dp"
+						android:gravity="center_vertical|center_horizontal"
+						android:text="@string/bottom_tick_labels"
+						android:textAllCaps="true"
+						android:textColor="@color/accent"
+						android:textSize="16sp" />
+				</android.support.v7.widget.CardView>
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/tickStart"
+				style="@style/RoboTheme"
+				android:text="@string/tickStart" />
+
+			<SeekBar
+				android:id="@+id/tickStartSeek"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:progress="1" />
+
+			<TextView
+				android:id="@+id/tickEnd"
+				style="@style/RoboTheme"
+				android:text="@string/tickEnd" />
+
+			<SeekBar
+				android:id="@+id/tickEndSeek"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:progress="10" />
+
+			<TextView
+				android:id="@+id/tickInterval"
+				style="@style/RoboTheme"
+				android:text="@string/tickInterval" />
+
+			<SeekBar
+				android:id="@+id/tickIntervalSeek"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:max="5"
+				android:min="1"
+				android:progress="1" />
+
+			<TextView
+				android:id="@+id/barWeight"
+				style="@style/RoboTheme"
+				android:text="@string/barWeight" />
+
+			<SeekBar
+				android:id="@+id/barWeightSeek"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:max="8"
+				android:min="0"
+				android:progress="2" />
+
+			<TextView
+				android:id="@+id/connectingLineWeight"
+				style="@style/RoboTheme"
+				android:text="@string/connectingLineWeight" />
+
+			<SeekBar
+				android:id="@+id/connectingLineWeightSeek"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:max="8"
+				android:min="0"
+				android:progress="4" />
+
+			<TextView
+				android:id="@+id/thumbRadius"
+				style="@style/RoboTheme"
+				android:text="@string/thumbRadius" />
+
+			<SeekBar
+				android:id="@+id/thumbRadiusSeek"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:max="30"
+				android:min="10"
+				android:progress="14" />
+
+			<TextView
+				android:id="@+id/thumbBoundarySize"
+				style="@style/RoboTheme"
+				android:text="@string/selectorBoundarySize" />
+
+			<SeekBar
+				android:id="@+id/thumbBoundarySeek"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:max="6"
+				android:progress="1" />
+
+			<CheckBox
+				android:id="@+id/cbRoundedBar"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:checked="false"
+				android:text="@string/check_box_rounded_background" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<android.support.v7.widget.CardView style="@style/button_holder">
+
+					<TextView
+						android:id="@+id/tickColor"
+						style="@style/button"
+						android:text="@string/tickColorNormal" />
+				</android.support.v7.widget.CardView>
+
+				<android.support.v7.widget.CardView style="@style/button_holder">
+
+					<TextView
+						android:id="@+id/pinColor"
+						style="@style/button"
+						android:text="@string/thumbColorNormal" />
+				</android.support.v7.widget.CardView>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<android.support.v7.widget.CardView style="@style/button_holder">
+
+					<TextView
+						android:id="@+id/selectorColor"
+						style="@style/button"
+						android:text="@string/selectorColorNormal" />
+				</android.support.v7.widget.CardView>
+
+				<android.support.v7.widget.CardView style="@style/button_holder">
+
+					<TextView
+						android:id="@+id/textColor"
+						style="@style/button"
+						android:text="@string/textColorNormal" />
+				</android.support.v7.widget.CardView>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<android.support.v7.widget.CardView style="@style/button_holder">
+
+					<TextView
+						android:id="@+id/connectingLineColor"
+						style="@style/button"
+						android:text="@string/connectingLineColor" />
+				</android.support.v7.widget.CardView>
+
+				<android.support.v7.widget.CardView style="@style/button_holder">
+
+					<TextView
+						android:id="@+id/barColor"
+						style="@style/button"
+						android:text="@string/barColor" />
+				</android.support.v7.widget.CardView>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<android.support.v7.widget.CardView
+					android:layout_width="0dp"
+					android:layout_height="48dp"
+					android:layout_margin="6dp"
+					android:layout_weight="1"
+					card_view:cardBackgroundColor="@color/white"
+					card_view:cardCornerRadius="2dp"
+					card_view:cardElevation="6dp">
+
+					<TextView
+						android:id="@+id/enableRange"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_gravity="center"
+						android:layout_marginLeft="8dp"
+						android:layout_marginRight="8dp"
+						android:gravity="center_vertical|center_horizontal"
+						android:text="@string/toggle_range"
+						android:textAllCaps="true"
+						android:textColor="@color/accent"
+						android:textSize="16sp" />
+				</android.support.v7.widget.CardView>
+
+				<android.support.v7.widget.CardView
+					android:layout_width="0dp"
+					android:layout_height="48dp"
+					android:layout_margin="6dp"
+					android:layout_weight="1"
+					card_view:cardBackgroundColor="@color/white"
+					card_view:cardCornerRadius="2dp"
+					card_view:cardElevation="6dp">
+
+					<TextView
+						android:id="@+id/disable"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_gravity="center"
+						android:layout_marginLeft="8dp"
+						android:layout_marginRight="8dp"
+						android:gravity="center_vertical|center_horizontal"
+						android:text="disable"
+						android:textAllCaps="true"
+						android:textColor="@color/accent"
+						android:textSize="16sp" />
+				</android.support.v7.widget.CardView>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<android.support.v7.widget.CardView style="@style/button_holder">
+
+					<TextView
+						android:id="@+id/tickLabelColor"
+						style="@style/button"
+						android:text="@string/tickLabelColor" />
+				</android.support.v7.widget.CardView>
+
+				<android.support.v7.widget.CardView style="@style/button_holder">
+
+					<TextView
+						android:id="@+id/tickLabelSelectColor"
+						style="@style/button"
+						android:text="@string/tickLabelSelectedColor" />
+				</android.support.v7.widget.CardView>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<android.support.v7.widget.CardView style="@style/button_holder">
+
+					<TextView
+						android:id="@+id/selectorBoundaryColor"
+						style="@style/button"
+						android:text="@string/selectorBoundaryColor" />
+				</android.support.v7.widget.CardView>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<android.support.v7.widget.CardView style="@style/button_holder">
+
+					<TextView
+						android:id="@+id/selectorRecyclerView"
+						style="@style/button"
+						android:text="@string/recyclerview_text" />
+				</android.support.v7.widget.CardView>
+			</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>

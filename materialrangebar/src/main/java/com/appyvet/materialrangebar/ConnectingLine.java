@@ -19,7 +19,6 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class representing the blue connecting line between the two thumbs.
@@ -47,13 +46,13 @@ public class ConnectingLine {
                           ArrayList<Integer> connectingLineColors) {
 
         //Need two colors
-        if(connectingLineColors.size() == 1){
+        if (connectingLineColors.size() == 1) {
             connectingLineColors.add(connectingLineColors.get(0));
         }
 
         colors = new int[connectingLineColors.size()];
         positions = new float[connectingLineColors.size()];
-        for(int index = 0; index < connectingLineColors.size(); index++){
+        for (int index = 0; index < connectingLineColors.size(); index++) {
             colors[index] = connectingLineColors.get(index);
 
             positions[index] = (float) index / (connectingLineColors.size() - 1);
@@ -66,7 +65,7 @@ public class ConnectingLine {
         mY = y;
     }
 
-    private LinearGradient getLinearGradient(float startX, float endX, float height){
+    private LinearGradient getLinearGradient(float startX, float endX, float height) {
 
         return new LinearGradient(startX, height, endX, height,
                 colors,
