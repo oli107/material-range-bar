@@ -125,7 +125,7 @@
 				android:baselineAligned="false"
 				android:orientation="horizontal">
 
-				<android.support.v7.widget.CardView
+				<androidx.cardview.widget.CardView
 					android:layout_width="0dp"
 					android:layout_height="48dp"
 					android:layout_margin="6dp"
@@ -146,9 +146,9 @@
 						android:textAllCaps="true"
 						android:textColor="@color/accent"
 						android:textSize="16sp" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 
-				<android.support.v7.widget.CardView
+				<androidx.cardview.widget.CardView
 					android:layout_width="0dp"
 					android:layout_height="48dp"
 					android:layout_margin="6dp"
@@ -169,7 +169,7 @@
 						android:textAllCaps="true"
 						android:textColor="@color/accent"
 						android:textSize="16sp" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 			</LinearLayout>
 
 			<TextView
@@ -271,21 +271,21 @@
 				android:baselineAligned="false"
 				android:orientation="horizontal">
 
-				<android.support.v7.widget.CardView style="@style/button_holder">
+				<androidx.cardview.widget.CardView style="@style/button_holder">
 
 					<TextView
 						android:id="@+id/tickColor"
 						style="@style/button"
 						android:text="@string/tickColorNormal" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 
-				<android.support.v7.widget.CardView style="@style/button_holder">
+				<androidx.cardview.widget.CardView style="@style/button_holder">
 
 					<TextView
 						android:id="@+id/pinColor"
 						style="@style/button"
 						android:text="@string/thumbColorNormal" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 			</LinearLayout>
 
 			<LinearLayout
@@ -294,21 +294,21 @@
 				android:baselineAligned="false"
 				android:orientation="horizontal">
 
-				<android.support.v7.widget.CardView style="@style/button_holder">
+				<androidx.cardview.widget.CardView style="@style/button_holder">
 
 					<TextView
 						android:id="@+id/selectorColor"
 						style="@style/button"
 						android:text="@string/selectorColorNormal" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 
-				<android.support.v7.widget.CardView style="@style/button_holder">
+				<androidx.cardview.widget.CardView style="@style/button_holder">
 
 					<TextView
 						android:id="@+id/textColor"
 						style="@style/button"
 						android:text="@string/textColorNormal" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 			</LinearLayout>
 
 			<LinearLayout
@@ -317,21 +317,21 @@
 				android:baselineAligned="false"
 				android:orientation="horizontal">
 
-				<android.support.v7.widget.CardView style="@style/button_holder">
+				<androidx.cardview.widget.CardView style="@style/button_holder">
 
 					<TextView
 						android:id="@+id/connectingLineColor"
 						style="@style/button"
 						android:text="@string/connectingLineColor" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 
-				<android.support.v7.widget.CardView style="@style/button_holder">
+				<androidx.cardview.widget.CardView style="@style/button_holder">
 
 					<TextView
 						android:id="@+id/barColor"
 						style="@style/button"
 						android:text="@string/barColor" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 			</LinearLayout>
 
 			<LinearLayout
@@ -340,7 +340,7 @@
 				android:baselineAligned="false"
 				android:orientation="horizontal">
 
-				<android.support.v7.widget.CardView
+				<androidx.cardview.widget.CardView
 					android:layout_width="0dp"
 					android:layout_height="48dp"
 					android:layout_margin="6dp"
@@ -361,9 +361,9 @@
 						android:textAllCaps="true"
 						android:textColor="@color/accent"
 						android:textSize="16sp" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 
-				<android.support.v7.widget.CardView
+				<androidx.cardview.widget.CardView
 					android:layout_width="0dp"
 					android:layout_height="48dp"
 					android:layout_margin="6dp"
@@ -384,7 +384,7 @@
 						android:textAllCaps="true"
 						android:textColor="@color/accent"
 						android:textSize="16sp" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 			</LinearLayout>
 
 			<LinearLayout
@@ -393,21 +393,21 @@
 				android:baselineAligned="false"
 				android:orientation="horizontal">
 
-				<android.support.v7.widget.CardView style="@style/button_holder">
+				<androidx.cardview.widget.CardView style="@style/button_holder">
 
 					<TextView
 						android:id="@+id/tickLabelColor"
 						style="@style/button"
 						android:text="@string/tickLabelColor" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 
-				<android.support.v7.widget.CardView style="@style/button_holder">
+				<androidx.cardview.widget.CardView style="@style/button_holder">
 
 					<TextView
 						android:id="@+id/tickLabelSelectColor"
 						style="@style/button"
 						android:text="@string/tickLabelSelectedColor" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 			</LinearLayout>
 
 			<LinearLayout
@@ -416,13 +416,13 @@
 				android:baselineAligned="false"
 				android:orientation="horizontal">
 
-				<android.support.v7.widget.CardView style="@style/button_holder">
+				<androidx.cardview.widget.CardView style="@style/button_holder">
 
 					<TextView
 						android:id="@+id/selectorBoundaryColor"
 						style="@style/button"
 						android:text="@string/selectorBoundaryColor" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 			</LinearLayout>
 
 			<LinearLayout
@@ -431,13 +431,13 @@
 				android:baselineAligned="false"
 				android:orientation="horizontal">
 
-				<android.support.v7.widget.CardView style="@style/button_holder">
+				<androidx.cardview.widget.CardView style="@style/button_holder">
 
 					<TextView
 						android:id="@+id/selectorRecyclerView"
 						style="@style/button"
 						android:text="@string/recyclerview_text" />
-				</android.support.v7.widget.CardView>
+				</androidx.cardview.widget.CardView>
 			</LinearLayout>
 		</LinearLayout>
 	</ScrollView>

@@ -5,6 +5,7 @@
 
 # Gradle files
 .gradle/
+material-range-bar.zip
 build/
 
 # Local configuration file (sdk path, etc)
@@ -24,10 +25,6 @@ captures/
 
 # Intellij
 *.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/gradle.xml
-.idea/libraries
 pom.xml
 
 # Keystore files
@@ -45,5 +42,4 @@ freeline/
 freeline_project_description.json
 .gitignore
 .idea/
-material-range-bar.iml
 rangebar/rangebar.iml
