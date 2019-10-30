@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -65,7 +64,8 @@
 
     <!-- Default padding for list items. This should match the action bar
          content inset so that ListActivity items line up correctly. -->
-    <dimen name="list_item_padding_horizontal_material">@dimen/action_bar_content_inset_material</dimen>
+    <dimen name="list_item_padding_horizontal_material">@dimen/action_bar_content_inset_material
+    </dimen>
     <dimen name="list_item_padding_start_material">@dimen/action_bar_content_inset_material</dimen>
     <dimen name="list_item_padding_end_material">@dimen/action_bar_content_inset_material</dimen>
 

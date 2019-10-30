@@ -38,7 +38,7 @@
     <string name="top_tick_labels">Top tick labels</string>
     <string name="bottom_tick_labels">Bottom tick labels</string>
     <string name="recyclerview_text">Rangebar Recyclerview Implementation</string>
-    <string-array translatable="false" name="default_color_choice_values">
+    <string-array name="default_color_choice_values" translatable="false">
         <item>#33b5e5</item>
         <item>#aa66cc</item>
         <item>#99cc00</item>

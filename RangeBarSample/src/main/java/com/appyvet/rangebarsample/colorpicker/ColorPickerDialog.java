@@ -85,7 +85,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerSwat
     }
 
     public static ColorPickerDialog newInstance(int titleResId, int[] colors, int selectedColor,
-            int columns, int size, Component component) {
+                                                int columns, int size, Component component) {
         ColorPickerDialog ret = new ColorPickerDialog();
         ret.initialize(titleResId, colors, selectedColor, columns, size, component);
         return ret;

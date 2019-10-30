@@ -140,7 +140,7 @@ public class ColorPickerPalette extends TableLayout {
      * will arrange them for accessibility purposes.
      */
     private void setSwatchDescription(int rowNumber, int index, int rowElements, boolean selected,
-            View swatch) {
+                                      View swatch) {
         int accessibilityIndex;
         if (rowNumber % 2 == 0) {
             // We're in a regular-ordered row
@@ -174,8 +174,8 @@ public class ColorPickerPalette extends TableLayout {
     /**
      * Creates a color swatch.
      */
-    private  ColorPickerSwatch createColorSwatch(int color, int selectedColor) {
-         ColorPickerSwatch view = new  ColorPickerSwatch(getContext(), color,
+    private ColorPickerSwatch createColorSwatch(int color, int selectedColor) {
+        ColorPickerSwatch view = new ColorPickerSwatch(getContext(), color,
                 color == selectedColor, mOnSwatchColorSelectedListener);
         TableRow.LayoutParams params = new TableRow.LayoutParams(mSwatchLength, mSwatchLength);
         params.setMargins(mMarginSize, mMarginSize, mMarginSize, mMarginSize);

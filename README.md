@@ -16,6 +16,7 @@ Developers can customize the following attributes (both via XML and programatica
 
 ### Change Log
 ```
+1.4.7 - Fixed selector boundary cut-off issue
 1.4.6 - Added tick colors, Added Left,Right and Default Selector Color. Added Touch Started /Touch Ended events to Rangebar. Fixed rangebar so that it behaves correctly inside scrollview. Also fixed Selected Tick label color issue.
 1.4.5 - Added TOP and BOTTOM tick labels properties and drag only option. Also updated Gradle and screenshots.
 1.4.4 - Added List of colors for connecting line and fix pins invisibility issue.
@@ -236,7 +237,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.appyvet:materialrangebar:1.4.6'
+    implementation 'com.appyvet:materialrangebar:1.4.7'
 }
 ```
 
@@ -244,7 +245,7 @@ dependencies {
 **if you are already using android support library inside your project and run into multiple version issues related to android support library then modify the gradle path like this**
 ```groovy
 dependencies {
-    compile ('com.appyvet:materialrangebar:1.4.6') {
+    compile ('com.appyvet:materialrangebar:1.4.7') {
             exclude module: 'support-compat'
     }
 }

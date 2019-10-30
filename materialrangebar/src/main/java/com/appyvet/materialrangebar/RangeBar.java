@@ -840,11 +840,11 @@ public class RangeBar extends View {
         invalidate();
     }
 
-     /**
-      * Set the default color of the ticks.
-      *
-      * @param tickDefaultColor Integer specifying the color of the ticks.
-      */
+    /**
+     * Set the default color of the ticks.
+     *
+     * @param tickDefaultColor Integer specifying the color of the ticks.
+     */
 
     public void setTickDefaultColor(int tickDefaultColor) {
         this.mTickDefaultColor = tickDefaultColor;
@@ -1064,7 +1064,6 @@ public class RangeBar extends View {
 
 
     /**
-     *
      * @param index
      * @return specified color
      */
@@ -1415,7 +1414,7 @@ public class RangeBar extends View {
             mActiveCircleColorLeft = mCircleColorLeft;
             mActiveCircleColorRight = mCircleColorRight;
             mActiveCircleBoundaryColor = mCircleBoundaryColor;
-            mTickDefaultColor = ta.getColor(R.styleable.RangeBar_mrb_tickDefaultColor , DEFAULT_TICK_COLOR);
+            mTickDefaultColor = ta.getColor(R.styleable.RangeBar_mrb_tickDefaultColor, DEFAULT_TICK_COLOR);
             mActiveTickDefaultColor = mTickDefaultColor;
             mTickColors = getColors(ta.getTextArray(R.styleable.RangeBar_mrb_tickColors), mTickDefaultColor);
             mActiveTickColors = new ArrayList<>(mTickColors);
@@ -1848,6 +1847,7 @@ public class RangeBar extends View {
 
     /**
      * Loads list of colors and sets default
+     *
      * @param colors
      * @return ArrayList<Integer>
      */
@@ -1891,6 +1891,7 @@ public class RangeBar extends View {
     /**
      * This flag is useful for tracking touch events that were meant as scroll events.
      * Copied from hidden method of {@link View} isInScrollingContainer.
+     *
      * @return true if any of this View parents is a scrolling View.
      */
     private boolean isInScrollingContainer() {

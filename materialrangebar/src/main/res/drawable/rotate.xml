@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <rotate xmlns:android="http://schemas.android.com/apk/res/android"
-        android:drawable="@drawable/roundrect"
-        android:fromDegrees="45"
-        android:drawablePadding="20dp"
-        android:toDegrees="45"
-        android:visible="true"/>
+    android:drawable="@drawable/roundrect"
+    android:drawablePadding="20dp"
+    android:fromDegrees="45"
+    android:toDegrees="45"
+    android:visible="true" />
