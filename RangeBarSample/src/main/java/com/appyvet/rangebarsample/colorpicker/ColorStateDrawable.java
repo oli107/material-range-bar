@@ -36,16 +36,6 @@ public class ColorStateDrawable extends LayerDrawable {
         mColor = color;
     }
 
-    /**
-     * Given a particular color, adjusts its value by a multiplier.
-     */
-    private static int getPressedColor(int color) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        hsv[2] = hsv[2] * PRESSED_STATE_MULTIPLIER;
-        return Color.HSVToColor(hsv);
-    }
-
     @Override
     protected boolean onStateChange(int[] states) {
         boolean pressedOrFocused = false;
@@ -63,6 +53,16 @@ public class ColorStateDrawable extends LayerDrawable {
         }
 
         return super.onStateChange(states);
+    }
+
+    /**
+     * Given a particular color, adjusts its value by a multiplier.
+     */
+    private static int getPressedColor(int color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+        hsv[2] = hsv[2] * PRESSED_STATE_MULTIPLIER;
+        return Color.HSVToColor(hsv);
     }
 
     @Override

@@ -37,14 +37,21 @@ public class Bar {
     private final Paint mBarPaint;
 
     private final Paint mTickPaint;
+    private Paint mLabelPaint;
+
     // Left-coordinate of the horizontal bar.
     private final float mLeftX;
+
     private final float mRightX;
+
     private final float mY;
-    private final float mTickHeight;
-    private Paint mLabelPaint;
+
     private int mNumSegments;
+
     private float mTickDistance;
+
+    private final float mTickHeight;
+
     private int mTickLabelColor;
 
     private int mTickLabelSelectedColor;

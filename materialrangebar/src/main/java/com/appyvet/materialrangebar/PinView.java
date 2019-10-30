@@ -187,6 +187,17 @@ class PinView extends View {
     }
 
     /**
+     * Set the x value of the pin
+     *
+     * @param x set x value of the pin
+     */
+    @Override
+    public void setX(float x) {
+        mX = x;
+    }
+
+
+    /**
      * Get the x value of the pin
      *
      * @return x float value of the pin
@@ -196,15 +207,6 @@ class PinView extends View {
         return mX;
     }
 
-    /**
-     * Set the x value of the pin
-     *
-     * @param x set x value of the pin
-     */
-    @Override
-    public void setX(float x) {
-        mX = x;
-    }
 
     /**
      * Set the value of the pin

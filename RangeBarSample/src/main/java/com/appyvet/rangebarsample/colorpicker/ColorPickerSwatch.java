@@ -39,8 +39,19 @@ public class ColorPickerSwatch extends FrameLayout implements View.OnClickListen
 
     private OnSwatchColorSelectedListener mOnSwatchColorSelectedListener;
 
+    /**
+     * Interface for a callback when a color square is selected.
+     */
+    public interface OnSwatchColorSelectedListener {
+
+        /**
+         * Called when a specific color square has been selected.
+         */
+        public void onSwatchColorSelected(int color);
+    }
+
     public ColorPickerSwatch(Context context, int color, boolean checked,
-                             OnSwatchColorSelectedListener listener) {
+            OnSwatchColorSelectedListener listener) {
         super(context);
         mColor = color;
         mOnSwatchColorSelectedListener = listener;
@@ -55,7 +66,7 @@ public class ColorPickerSwatch extends FrameLayout implements View.OnClickListen
     protected void setColor(int color) {
         Drawable[] colorDrawable = new Drawable[]
                 {ContextCompat.getDrawable(getContext(), R.drawable.color_picker_swatch)};
-        mSwatchImage.setImageDrawable(new ColorStateDrawable(colorDrawable, color));
+        mSwatchImage.setImageDrawable(new  ColorStateDrawable(colorDrawable, color));
     }
 
     private void setChecked(boolean checked) {
@@ -71,16 +82,5 @@ public class ColorPickerSwatch extends FrameLayout implements View.OnClickListen
         if (mOnSwatchColorSelectedListener != null) {
             mOnSwatchColorSelectedListener.onSwatchColorSelected(mColor);
         }
-    }
-
-    /**
-     * Interface for a callback when a color square is selected.
-     */
-    public interface OnSwatchColorSelectedListener {
-
-        /**
-         * Called when a specific color square has been selected.
-         */
-        public void onSwatchColorSelected(int color);
     }
 }
