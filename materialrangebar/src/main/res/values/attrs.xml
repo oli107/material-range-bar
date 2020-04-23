@@ -29,7 +29,11 @@
         <attr name="mrb_pinMaxFont" format="dimension" />
         <attr name="mrb_rangeBarPaddingBottom" format="dimension" />
         <attr name="mrb_rangeBar" format="boolean" />
-        <attr name="mrb_temporaryPins" format="boolean" />
+        <attr name="mrb_temporaryPins" format="enum">
+            <enum name="ALWAYS" value="0" />
+            <enum name="ON_TOUCH_ONLY" value="1" />
+            <enum name="NEVER" value="2" />
+        </attr>
         <attr name="mrb_rangeBar_rounded" format="boolean" />
         <attr name="mrb_connectingLineWeight" format="dimension" />
         <attr name="mrb_connectingLineColor" format="reference|color" />

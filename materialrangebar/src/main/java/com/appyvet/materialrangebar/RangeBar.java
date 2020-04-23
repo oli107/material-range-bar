@@ -247,7 +247,7 @@ public class RangeBar extends View {
 
     private boolean drawTicks = true;
 
-    private boolean mArePinsTemporary = true;
+    private int mArePinsTemporary = 1;
 
     private boolean mOnlyOnDrag = false;
 
@@ -324,7 +324,7 @@ public class RangeBar extends View {
         bundle.putFloat("BAR_PADDING_BOTTOM", mBarPaddingBottom);
         bundle.putBoolean("IS_RANGE_BAR", mIsRangeBar);
         bundle.putBoolean("IS_ONLY_ON_DRAG", mOnlyOnDrag);
-        bundle.putBoolean("ARE_PINS_TEMPORARY", mArePinsTemporary);
+        bundle.putInt("ARE_PINS_TEMPORARY", mArePinsTemporary);
         bundle.putInt("LEFT_INDEX", mLeftIndex);
         bundle.putInt("RIGHT_INDEX", mRightIndex);
         bundle.putInt("MIN_INDEX_DISTANCE", mMinIndexDistance);
@@ -374,7 +374,7 @@ public class RangeBar extends View {
             mBarPaddingBottom = bundle.getFloat("BAR_PADDING_BOTTOM");
             mIsRangeBar = bundle.getBoolean("IS_RANGE_BAR");
             mOnlyOnDrag = bundle.getBoolean("IS_ONLY_ON_DRAG");
-            mArePinsTemporary = bundle.getBoolean("ARE_PINS_TEMPORARY");
+            mArePinsTemporary = bundle.getInt("ARE_PINS_TEMPORARY");
 
             mLeftIndex = bundle.getInt("LEFT_INDEX");
             mRightIndex = bundle.getInt("RIGHT_INDEX");
@@ -848,7 +848,7 @@ public class RangeBar extends View {
      *                         stay
      *                         drawn
      */
-    public void setTemporaryPins(boolean arePinsTemporary) {
+    public void setTemporaryPins(int arePinsTemporary) {
         mArePinsTemporary = arePinsTemporary;
         invalidate();
     }
@@ -1479,7 +1479,7 @@ public class RangeBar extends View {
             mActiveConnectingLineColors = new ArrayList<>(mConnectingLineColors);
 
             mIsRangeBar = ta.getBoolean(R.styleable.RangeBar_mrb_rangeBar, true);
-            mArePinsTemporary = ta.getBoolean(R.styleable.RangeBar_mrb_temporaryPins, true);
+            mArePinsTemporary = ta.getInt(R.styleable.RangeBar_mrb_temporaryPins, 1);
             mIsBarRounded = ta.getBoolean(R.styleable.RangeBar_mrb_rangeBar_rounded, false);
 
             float density = mDisplayMetrices.density;
@@ -1812,7 +1812,7 @@ public class RangeBar extends View {
         if (mFirstSetTickCount) {
             mFirstSetTickCount = false;
         }
-        if (mArePinsTemporary) {
+        if (mArePinsTemporary == 2 || mArePinsTemporary == 1) {
             ValueAnimator animator = ValueAnimator.ofFloat(0, mExpandedPinRadius);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
@@ -1842,7 +1842,7 @@ public class RangeBar extends View {
         int tickIndex = mBar.getNearestTickIndex(thumb);
         thumb.setXValue(getPinValue(tickIndex));
 
-        if (mArePinsTemporary) {
+        if (mArePinsTemporary == 2 || mArePinsTemporary == 1) {
             ValueAnimator animator = ValueAnimator.ofFloat(mExpandedPinRadius, 0);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 

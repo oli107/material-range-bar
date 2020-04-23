@@ -40,7 +40,7 @@
         app:mrb_rangeBarPaddingBottom="30dp"
         app:mrb_rangeBar_rounded="true"
         app:mrb_rightThumbColor="#1E88E5"
-        app:mrb_temporaryPins="true"
+        app:mrb_temporaryPins="ON_TOUCH_ONLY"
         app:mrb_thumbBoundaryColor="@color/accent"
         app:mrb_thumbBoundarySize="2dp"
         app:mrb_thumbSize="10dp"

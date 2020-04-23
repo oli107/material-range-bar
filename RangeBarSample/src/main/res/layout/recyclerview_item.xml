@@ -20,7 +20,7 @@
         app:mrb_thumbBoundaryColor="@color/accent"
         app:mrb_thumbBoundarySize="2dp"
         app:mrb_thumbSize="10dp"
-        app:mrb_temporaryPins="true"
+        app:mrb_temporaryPins="ALWAYS"
         app:mrb_tickBottomLabels="@array/ticks_labels"
         app:mrb_tickDefaultLabel="label"
         app:mrb_tickEnd="10"
