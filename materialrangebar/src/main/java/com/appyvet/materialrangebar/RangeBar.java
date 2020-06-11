@@ -1666,7 +1666,14 @@ public class RangeBar extends View {
      */
     private void onActionDown(float x, float y) {
         if (mIsRangeBar) {
-            if (!mRightThumb.isPressed() && mLeftThumb.isInTargetZone(x, y)) {
+            // If both target zones overlap, determine the nearest one.
+            if (mLeftThumb.isInTargetZone(x, y) && mRightThumb.isInTargetZone(x, y)) {
+                if (getLeftThumbXDistance(x) < getRightThumbXDistance(x) && !mRightThumb.isPressed()) {
+                    pressPin(mLeftThumb);
+                } else if (!mLeftThumb.isPressed()) {
+                    pressPin(mRightThumb);
+                }
+            } else if (!mRightThumb.isPressed() && mLeftThumb.isInTargetZone(x, y)) {
 
                 pressPin(mLeftThumb);
 
