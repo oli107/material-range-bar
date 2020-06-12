@@ -1933,7 +1933,7 @@ public class RangeBar extends View {
      * Updates the Thumbs bounds based on the minimum distance, to their right and their left respectively.
      */
     private void updateThumbBounds() {
-        mMinIndexDistance = (int) Math.ceil(mDesiredMinDistance / mTickInterval);
+        mMinIndexDistance = mDesiredMinDistance < 0 ? -1 : (int) Math.ceil(mDesiredMinDistance / mTickInterval);
         if (mMinIndexDistance > mTickCount - 1) {
             Log.e(TAG, "Desired thumb distance greater than total range.");
             mMinIndexDistance = mTickCount - 1;
