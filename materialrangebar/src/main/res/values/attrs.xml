@@ -36,6 +36,8 @@
         <attr name="mrb_pinRadius" format="dimension" />
         <attr name="mrb_connectingLineColors" format="reference" />
         <attr name="mrb_onlyOnDrag" format="boolean" />
+        <attr name="mrb_fontFamily" format="reference" />
+        <attr name="mrb_bottomLabel_marginTop" format="dimension" />
     </declare-styleable>
 
 </resources>

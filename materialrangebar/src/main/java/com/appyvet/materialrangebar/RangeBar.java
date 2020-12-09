@@ -156,6 +156,10 @@ public class RangeBar extends View {
 
     private float mTickLabelSize = DEFAULT_TICK_LABEL_FONT_SP;
 
+    private int mFontFamily = 0;
+
+    private float mBottomLabelMarginTop = 0;
+
     private CharSequence[] mTickBottomLabels;
 
     private CharSequence[] mTickTopLabels;
@@ -457,7 +461,7 @@ public class RangeBar extends View {
 
         mBar = new Bar(ctx, marginLeft, yPos, barLength, mTickCount, mTickHeight, mTickDefaultColor, mTickColors,
                 mBarWeight, mBarColor, mIsBarRounded, mTickLabelColor, mTickLabelSelectedColor,
-                mTickTopLabels, mTickBottomLabels, mTickDefaultLabel, mTickLabelSize);
+                mTickTopLabels, mTickBottomLabels, mTickDefaultLabel, mTickLabelSize, mFontFamily, mBottomLabelMarginTop);
 
         // Initialize thumbs to the desired indices
         if (mIsRangeBar) {
@@ -1493,6 +1497,10 @@ public class RangeBar extends View {
             mIsRangeBar = ta.getBoolean(R.styleable.RangeBar_mrb_rangeBar, true);
 
             mOnlyOnDrag = ta.getBoolean(R.styleable.RangeBar_mrb_onlyOnDrag, false);
+
+            mFontFamily = ta.getResourceId(R.styleable.RangeBar_mrb_fontFamily, 0);
+
+            mBottomLabelMarginTop = ta.getDimension(R.styleable.RangeBar_mrb_bottomLabel_marginTop, 0f);
         } finally {
             ta.recycle();
         }
@@ -1518,7 +1526,9 @@ public class RangeBar extends View {
                 mTickTopLabels,
                 mTickBottomLabels,
                 mTickDefaultLabel,
-                mTickLabelSize);
+                mTickLabelSize,
+                mFontFamily,
+                mBottomLabelMarginTop);
         invalidate();
     }
 

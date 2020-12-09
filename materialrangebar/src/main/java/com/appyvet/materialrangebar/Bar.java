@@ -18,8 +18,11 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import androidx.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +68,8 @@ public class Bar {
     private float mTickLabelSize;
 
     private int mTickDefaultColor;
+
+    private float mBottomLabelMarginTop = 0;
 
     private List<Integer> mTickColors = new ArrayList<>();
 
@@ -174,7 +179,8 @@ public class Bar {
                CharSequence[] tickTopLabels,
                CharSequence[] tickBottomLabels,
                String tickDefaultLabel,
-               float tickLabelSize) {
+               float tickLabelSize,
+               int mFontFamily) {
         this(ctx, x, y, length, tickCount, tickHeight, barWeight, barColor, isBarRounded);
 
         if (tickTopLabels != null || tickBottomLabels != null) {
@@ -182,6 +188,9 @@ public class Bar {
             mLabelPaint = new Paint();
             mLabelPaint.setColor(tickLabelColor);
             mLabelPaint.setAntiAlias(true);
+            if (mFontFamily > 0) {
+                mLabelPaint.setTypeface(ResourcesCompat.getFont(ctx, mFontFamily));
+            }
             mTickLabelColor = tickLabelColor;
             mTickLabelSelectedColor = tickLabelSelectedColor;
             mTickTopLabels = tickTopLabels;
@@ -223,8 +232,9 @@ public class Bar {
                CharSequence[] tickTopLabels,
                CharSequence[] tickBottomLabels,
                String tickDefaultLabel,
-               float tickLabelSize) {
-        this(ctx, x, y, length, tickCount, tickHeight, barWeight, barColor, isBarRounded, tickLabelColor, tickLabelSelectedColor, tickTopLabels, tickBottomLabels, tickDefaultLabel, tickLabelSize);
+               float tickLabelSize,
+               int fontFamily) {
+        this(ctx, x, y, length, tickCount, tickHeight, barWeight, barColor, isBarRounded, tickLabelColor, tickLabelSelectedColor, tickTopLabels, tickBottomLabels, tickDefaultLabel, tickLabelSize, fontFamily);
         mTickDefaultColor = tickDefaultColor;
         mTickPaint.setColor(tickDefaultColor);
     }
@@ -232,20 +242,22 @@ public class Bar {
     /**
      * Bar constructor
      *
-     * @param ctx              the context
-     * @param x                the start x co-ordinate
-     * @param y                the y co-ordinate
-     * @param length           the length of the bar in px
-     * @param tickCount        the number of ticks on the bar
-     * @param tickHeight       the height of each tick
-     * @param tickDefaultColor defualt tick color
-     * @param tickColors       the colors of each tick
-     * @param barWeight        the weight of the bar
-     * @param barColor         the color of the bar
-     * @param isBarRounded     if the bar has rounded edges or not
-     * @param tickLabelColor   the color of each tick's label
-     * @param tickTopLabels    the top label of each tick
-     * @param tickBottomLabels the top label of each tick
+     * @param ctx                  the context
+     * @param x                    the start x co-ordinate
+     * @param y                    the y co-ordinate
+     * @param length               the length of the bar in px
+     * @param tickCount            the number of ticks on the bar
+     * @param tickHeight           the height of each tick
+     * @param tickDefaultColor     defualt tick color
+     * @param tickColors           the colors of each tick
+     * @param barWeight            the weight of the bar
+     * @param barColor             the color of the bar
+     * @param isBarRounded         if the bar has rounded edges or not
+     * @param tickLabelColor       the color of each tick's label
+     * @param tickTopLabels        the top label of each tick
+     * @param tickBottomLabels     the top label of each tick
+     * @param fontFamily           font family
+     * @param bottomLabelMarginTop top margin between label and slider
      */
     public Bar(Context ctx,
                float x,
@@ -263,10 +275,13 @@ public class Bar {
                CharSequence[] tickTopLabels,
                CharSequence[] tickBottomLabels,
                String tickDefaultLabel,
-               float tickLabelSize) {
+               float tickLabelSize,
+               int fontFamily,
+               float bottomLabelMarginTop) {
 
-        this(ctx, x, y, length, tickCount, tickHeight, barWeight, barColor, isBarRounded, tickLabelColor, tickLabelSelectedColor, tickTopLabels, tickBottomLabels, tickDefaultLabel, tickLabelSize);
+        this(ctx, x, y, length, tickCount, tickHeight, barWeight, barColor, isBarRounded, tickLabelColor, tickLabelSelectedColor, tickTopLabels, tickBottomLabels, tickDefaultLabel, tickLabelSize, fontFamily);
 
+        mBottomLabelMarginTop = bottomLabelMarginTop;
         mTickDefaultColor = tickDefaultColor;
         mTickColors = tickColors;
     }
@@ -442,10 +457,15 @@ public class Bar {
         if (isTop) {
             yPos = mY - labelBounds.height() - pinRadius;
         } else {
-            yPos = mY + labelBounds.height() + pinRadius;
+            yPos = mY + labelBounds.height() + pinRadius + getPxByDp(mBottomLabelMarginTop);
         }
 
         canvas.drawText(label, xPos, yPos, mLabelPaint);
+    }
+
+    private int getPxByDp(float dp) {
+        DisplayMetrics metrics = mRes.getDisplayMetrics();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, metrics);
     }
 
     private Paint getTick(int index) {
